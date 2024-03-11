@@ -55,23 +55,24 @@
             const files = await response.json();
             const file_list_element = document.getElementById('file_list');
 
-            files.forEach(file => {
+            for (const file of files) {
+                const content = await fetch_file_content(file.download_url);
+                const firstLine = content.split('\n')[0];
                 const link = document.createElement('a');
                 link.href = '#';
-                link.textContent = file.name;
+                link.textContent = firstLine;
                 link.onclick = () => {
-                    fetch_file_content(file.download_url);
+                    document.getElementById('file_content').textContent = content;
                     return false;
                 };
                 file_list_element.appendChild(link);
                 file_list_element.appendChild(document.createElement('br'));
-            });
+            }
         }
 
         async function fetch_file_content(url) {
             const response = await fetch(url);
-            const content = await response.text();
-            document.getElementById('file_content').textContent = content;
+            return await response.text();
         }
 
         fetch_files();
