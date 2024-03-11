@@ -6,23 +6,36 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #file_list_container {
+            width: 50%;
+            padding-right: 20px;
         }
         #file_list {
-            width: 30%;
+            position: fixed;
         }
         #file_content {
-            white-space: pre-wrap;
-            width: 70%;
-            overflow-x: auto;
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            overflow-y: auto;
+            border-left: 2px solid #ccc;
+            padding-left: 20px;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
-    <div>
+    <div id="file_list_container">
         <h1>My Proofs</h1>
         <div id="file_list"></div>
     </div>
-    <pre id="file_content"></pre>
+    <div id="file_content"></div>
 
     <script>
         const repo_owner = 'markjouh';
