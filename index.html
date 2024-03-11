@@ -7,33 +7,37 @@
             font-family: Arial, sans-serif;
             display: flex;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             box-sizing: border-box;
         }
         #file_list_container {
             width: 50%;
-            padding-right: 20px;
+            padding-right: 10px;
         }
         #file_list {
             overflow-y: auto;
-            max-height: calc(100vh - 40px - 20px); /* Subtract top and bottom padding and title height */
+            max-height: calc(100vh - 20px); /* Subtract top and bottom padding */
         }
         #file_content {
             position: fixed;
             right: 0;
-            top: 60px; /* Align with the title */
+            top: 10px; /* Align with the top padding */
             width: 50%;
-            height: calc(100vh - 60px); /* Subtract top margin */
+            height: calc(100vh - 20px); /* Subtract top and bottom padding */
             overflow-y: auto;
             border-left: 2px solid #ccc;
-            padding-left: 20px;
+            padding-left: 10px;
             box-sizing: border-box;
+        }
+        .caption {
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
     <div id="file_list_container">
         <h1>My Proofs</h1>
+        <p class="caption">This is a caption under the title.</p>
         <div id="file_list"></div>
     </div>
     <div id="file_content"></div>
