@@ -18,8 +18,10 @@
     </style>
 </head>
 <body>
-    <h1>My Proofs</h1>
-    <div id="file_list"></div>
+    <div>
+        <h1>My Proofs</h1>
+        <div id="file_list"></div>
+    </div>
     <pre id="file_content"></pre>
 
     <script>
@@ -34,12 +36,21 @@
 
             files.forEach(file => {
                 const link = document.createElement('a');
-                link.href = file.download_url;
+                link.href = '#';
                 link.textContent = file.name;
-                link.target = '_blank';
+                link.onclick = () => {
+                    fetch_file_content(file.download_url);
+                    return false;
+                };
                 file_list_element.appendChild(link);
                 file_list_element.appendChild(document.createElement('br'));
             });
+        }
+
+        async function fetch_file_content(url) {
+            const response = await fetch(url);
+            const content = await response.text();
+            document.getElementById('file_content').textContent = content;
         }
 
         fetch_files();
