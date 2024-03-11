@@ -22,7 +22,7 @@
     <script>
         const repoOwner = 'markjouh';
         const repoName = 'marksite';
-        const basePath = ''; // Leave empty if files are in the root
+        const basePath = 'posts'; // Leave empty if files are in the root
 
         async function fetchFiles() {
             const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${basePath}`);
