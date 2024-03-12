@@ -12,15 +12,11 @@
             box-sizing: border-box;
         }
         #file_list_container {
-            width: 50%;
+            width: calc(50% - 10px); /* Adjusted width to create space for the scrollbar */
             padding-right: 10px;
             overflow-y: auto; /* Only scroll the left half */
             height: calc(100vh - 30px); /* Adjusted for increased padding */
-            scrollbar-width: none; /* Hide scrollbar for Firefox */
-            -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
-        }
-        #file_list_container::-webkit-scrollbar {
-            display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+            margin-right: 10px; /* Added right margin for the scrollbar */
         }
         #file_list {
             margin-top: 0; /* Reduce space above the file list */
