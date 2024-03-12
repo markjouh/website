@@ -57,7 +57,11 @@
 
         async function fetch_files() {
             const response = await fetch(`https://api.github.com/repos/${repo_owner}/${repo_name}/contents/${base_path}`);
-            const files = await response.json();
+            let files = await response.json();
+
+            // Sort files by created_at timestamp in descending order
+            files.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
             const file_list_element = document.getElementById('file_list');
 
             for (const file of files) {
