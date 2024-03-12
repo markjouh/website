@@ -8,14 +8,14 @@
             font-family: Arial, sans-serif;
             display: flex;
             margin: 0;
-            padding: 10px; /* Increased overall padding */
+            padding: 15px; /* Increased overall padding */
             box-sizing: border-box;
         }
         #file_list_container {
             width: 50%;
             padding-right: 10px;
             overflow-y: auto; /* Only scroll the left half */
-            height: calc(100vh - 20px); /* Adjusted for padding */
+            height: calc(100vh - 30px); /* Adjusted for increased padding */
         }
         #file_list {
             margin-top: 0; /* Reduce space above the file list */
@@ -27,8 +27,9 @@
             width: 50%;
             height: 100vh;
             overflow-y: auto;
+            overflow-x: hidden; /* Disable horizontal scrolling */
             border-left: 2px solid #ccc;
-            padding: 10px; /* Adjusted padding */
+            padding: 15px; /* Adjusted padding */
             box-sizing: border-box;
             white-space: pre-wrap; /* Wrap text instead of horizontal scrolling */
         }
