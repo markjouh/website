@@ -8,32 +8,35 @@
             font-family: Arial, sans-serif;
             display: flex;
             margin: 0;
-            padding: 10px;
+            padding: 5px; /* Reduced overall padding */
             box-sizing: border-box;
         }
         #file_list_container {
             width: 50%;
-            padding-right: 10px;
-            padding-top: 5px; /* Reduced space above the title */
+            padding-right: 5px;
         }
         #file_list {
             overflow-y: auto;
-            max-height: calc(100vh - 20px); /* Subtract top and bottom padding */
+            height: calc(100vh - 60px); /* Adjusted for reduced padding and title/caption height */
         }
         #file_content {
-            position: fixed;
+            position: absolute; /* Changed to absolute for full height coverage */
             right: 0;
-            top: 10px; /* Align with the top padding */
+            top: 0;
             width: 50%;
-            height: calc(100vh - 20px); /* Subtract top and bottom padding */
+            height: 100vh;
             overflow-y: auto;
             border-left: 2px solid #ccc;
-            padding-left: 10px;
+            padding: 5px 5px 5px 15px; /* Adjusted padding */
             box-sizing: border-box;
+        }
+        h1 {
+            margin-top: 0; /* Reduced space above the title */
         }
         .caption {
             margin-top: -5px; /* Move the caption closer to the title */
             opacity: 0.6; /* Decrease the opacity */
+            font-size: 0.9em; /* Adjust caption size if needed */
         }
     </style>
 </head>
@@ -62,7 +65,7 @@
                 link.href = '#';
                 link.textContent = firstLine;
                 link.onclick = () => {
-                    document.getElementById('file_content').textContent = content;
+                    document.getElementById('file_content').innerHTML = '<pre>' + content + '</pre>';
                     return false;
                 };
                 file_list_element.appendChild(link);
