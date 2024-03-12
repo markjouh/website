@@ -15,12 +15,11 @@
             width: calc(50% - 10px); /* Adjusted width for scrollbar space */
             padding-right: 10px;
             overflow-y: auto; /* Allow scrolling within the left half */
-            height: 100vh; /* Full view height without subtracting padding */
+            height: calc(100vh - 30px); /* Adjusted for increased padding */
             margin-right: 10px; /* Right margin for the scrollbar */
-            box-sizing: border-box; /* Include padding in the element's total width and height */
         }
         #file_list {
-            margin-top: 0; /* Ensure no additional space above the file list */
+            margin-top: 5px; /* Slight space above the file list */
         }
         #file_content {
             position: absolute; /* Full height coverage */
