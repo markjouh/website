@@ -1,0 +1,3 @@
+About
+
+In recent months, I started proving/reflecting on my solutions to competitive programming problems after getting AC more regularly, which often involves writing stuff down in a text file. I decided to make a minimal website to hold these for convenient viewing for myself later, and (mostly) just to have a cool archive of interesting problems I've solved. I might add some other stuff too (kind of like a blog?) but that's this site's main purpose. Don't expect anything too high-effort...
