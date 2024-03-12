@@ -8,16 +8,17 @@
             font-family: Arial, sans-serif;
             display: flex;
             margin: 0;
-            padding: 5px; /* Reduced overall padding */
+            padding: 10px; /* Increased overall padding */
             box-sizing: border-box;
         }
         #file_list_container {
             width: 50%;
-            padding-right: 5px;
+            padding-right: 10px;
+            overflow-y: auto; /* Only scroll the left half */
+            height: calc(100vh - 20px); /* Adjusted for padding */
         }
         #file_list {
-            overflow-y: auto;
-            height: calc(100vh - 60px); /* Adjusted for reduced padding and title/caption height */
+            margin-top: 0; /* Reduce space above the file list */
         }
         #file_content {
             position: absolute; /* Changed to absolute for full height coverage */
@@ -27,14 +28,16 @@
             height: 100vh;
             overflow-y: auto;
             border-left: 2px solid #ccc;
-            padding: 5px 5px 5px 15px; /* Adjusted padding */
+            padding: 10px; /* Adjusted padding */
             box-sizing: border-box;
+            white-space: pre-wrap; /* Wrap text instead of horizontal scrolling */
         }
         h1 {
             margin-top: 0; /* Reduced space above the title */
+            margin-bottom: 5px; /* Reduce space between title and caption */
         }
         .caption {
-            margin-top: -5px; /* Move the caption closer to the title */
+            margin-top: 0; /* Move the caption closer to the title */
             opacity: 0.6; /* Decrease the opacity */
             font-size: 0.9em; /* Adjust caption size if needed */
         }
