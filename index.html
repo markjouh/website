@@ -3,6 +3,7 @@
 <head>
     <title>Mark Zhou</title>
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/markjouh/website/main/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-R+8v7QeQa4bkH9S1l1qFfeE8tI7nSN1GmEzvFGq3f3G0QMxBDc+4fXr5BOghwCptxBe+U4kKmJYjVgEOkA/I1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,6 +41,12 @@
             opacity: 0.6; /* Adjust caption opacity */
             font-size: 0.9em; /* Caption size */
         }
+        .katex-title {
+            display: inline-block;
+        }
+        .katex-content {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -50,6 +57,7 @@
     </div>
     <div id="file_content"></div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-Oy8f2G4y7A4E8kVexsA2G4+iZRU+p1SL7BLCf2NwlR/zqpn1bnXu5DoJm2KQ34h0+qafvy0E2VRQpp5eVP0S8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         const repo_owner = 'markjouh';
         const repo_name = 'website';
@@ -65,13 +73,29 @@
                 const firstLine = content.split('\n')[0];
                 const link = document.createElement('a');
                 link.href = '#';
-                link.textContent = firstLine;
+                renderMathInElement(link, { // Render KaTeX in the title
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "\\[", right: "\\]", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false }
+                    ]
+                });
                 link.onclick = () => {
                     const formattedContent = content.replace(/\n/g, '<br>'); // Newlines replaced with <br>
                     document.getElementById('file_content').innerHTML = formattedContent;
                     window.location.hash = file.name; // Update the URL hash
+                    renderMathInElement(document.getElementById('file_content'), { // Render KaTeX in the content
+                        delimiters: [
+                            { left: "$$", right: "$$", display: true },
+                            { left: "\\[", right: "\\]", display: true },
+                            { left: "$", right: "$", display: false },
+                            { left: "\\(", right: "\\)", display: false }
+                        ]
+                    });
                     return false;
                 };
+                link.textContent = firstLine;
                 file_list_element.appendChild(link);
                 file_list_element.appendChild(document.createElement('br'));
             }
@@ -84,6 +108,14 @@
                     const content = await fetch_file_content(file.download_url);
                     const formattedContent = content.replace(/\n/g, '<br>');
                     document.getElementById('file_content').innerHTML = formattedContent;
+                    renderMathInElement(document.getElementById('file_content'), { // Render KaTeX in the content
+                        delimiters: [
+                            { left: "$$", right: "$$", display: true },
+                            { left: "\\[", right: "\\]", display: true },
+                            { left: "$", right: "$", display: false },
+                            { left: "\\(", right: "\\)", display: false }
+                        ]
+                    });
                 }
             }
         }
