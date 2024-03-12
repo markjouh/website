@@ -8,21 +8,22 @@
             font-family: Arial, sans-serif;
             display: flex;
             margin: 0;
-            padding: 15px; /* Increased overall padding */
+            padding: 15px; /* Maintain overall padding */
             box-sizing: border-box;
         }
         #file_list_container {
-            width: calc(50% - 10px); /* Adjusted width to create space for the scrollbar */
+            width: calc(50% - 10px); /* Adjusted width for scrollbar space */
             padding-right: 10px;
-            overflow-y: auto; /* Only scroll the left half */
-            height: calc(100vh - 30px); /* Adjusted for increased padding */
-            margin-right: 10px; /* Added right margin for the scrollbar */
+            overflow-y: auto; /* Allow scrolling within the left half */
+            height: 100vh; /* Full view height without subtracting padding */
+            margin-right: 10px; /* Right margin for the scrollbar */
+            box-sizing: border-box; /* Include padding in the element's total width and height */
         }
         #file_list {
-            margin-top: 5px; /* Added space above the file list */
+            margin-top: 0; /* Ensure no additional space above the file list */
         }
         #file_content {
-            position: absolute; /* Changed to absolute for full height coverage */
+            position: absolute; /* Full height coverage */
             right: 0;
             top: 0;
             width: 50%;
@@ -32,14 +33,13 @@
             padding: 15px; /* Adjusted padding */
             box-sizing: border-box;
         }
-        h1 {
-            margin-top: 0; /* Reduced space above the title */
+        h1, .caption {
+            margin-top: 0; /* Align closely with the top */
             margin-bottom: 5px; /* Reduce space between title and caption */
         }
         .caption {
-            margin-top: 0; /* Move the caption closer to the title */
-            opacity: 0.6; /* Decrease the opacity */
-            font-size: 0.9em; /* Adjust caption size if needed */
+            opacity: 0.6; /* Adjust caption opacity */
+            font-size: 0.9em; /* Caption size */
         }
     </style>
 </head>
@@ -68,7 +68,7 @@
                 link.href = '#';
                 link.textContent = firstLine;
                 link.onclick = () => {
-                    const formattedContent = content.replace(/\n/g, '<br>'); // Replace newlines with <br> tags
+                    const formattedContent = content.replace(/\n/g, '<br>'); // Newlines replaced with <br>
                     document.getElementById('file_content').innerHTML = formattedContent;
                     return false;
                 };
