@@ -16,6 +16,11 @@
             padding-right: 10px;
             overflow-y: auto; /* Only scroll the left half */
             height: calc(100vh - 30px); /* Adjusted for increased padding */
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+            -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+        }
+        #file_list_container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
         }
         #file_list {
             margin-top: 0; /* Reduce space above the file list */
