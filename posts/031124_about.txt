@@ -1,7 +1,9 @@
+My initial idea for this problem was: we want to assign values to vertices so that vertices have distance at most d (BSed) from everything in their subtrees. However, I think we actually don't need to consider subtrees at all. 
+
 About
 
 In recent months, I started proving/reflecting on my solutions to competitive programming problems after getting AC more regularly, which often involves writing stuff down in a text file. I decided to make a minimal website to hold these for convenient viewing for myself later, and (mostly) just to have a cool archive of interesting problems I've solved.
 
-All this site really does is load all text files from a specified folder and list them out on the left, plus a basic viewer and link functionality. Minimal effort all-around.
+All this site really does is load all text files from a specified folder and list them out on the left (with the first line as the title), plus a basic viewer and link functionality. Minimal effort all-around.
 
 I might add some other stuff too (kind of like a blog?) but that's this site's main purpose.
