@@ -8,15 +8,15 @@
             font-family: Arial, sans-serif;
             display: flex;
             margin: 0;
-            padding: 15px; /* Maintain overall padding */
+            padding: 0; /* Set body padding to 0 */
             box-sizing: border-box;
         }
         #file_list_container {
             width: calc(50% - 10px); /* Adjusted width for scrollbar space */
-            padding-right: 10px;
+            padding: 15px 10px 15px 15px; /* Adjusted padding */
             overflow-y: auto; /* Allow scrolling within the left half */
-            height: calc(100vh - 30px); /* Adjusted for increased padding */
-            margin-right: 10px; /* Right margin for the scrollbar */
+            height: calc(100vh - 30px); /* Adjusted for padding */
+            box-sizing: border-box; /* Include padding in the element's total width and height */
         }
         #file_list {
             margin-top: 5px; /* Slight space above the file list */
@@ -57,31 +57,4 @@
 
         async function fetch_files() {
             const response = await fetch(`https://api.github.com/repos/${repo_owner}/${repo_name}/contents/${base_path}`);
-            const files = await response.json();
-            const file_list_element = document.getElementById('file_list');
-
-            for (const file of files) {
-                const content = await fetch_file_content(file.download_url);
-                const firstLine = content.split('\n')[0];
-                const link = document.createElement('a');
-                link.href = '#';
-                link.textContent = firstLine;
-                link.onclick = () => {
-                    const formattedContent = content.replace(/\n/g, '<br>'); // Newlines replaced with <br>
-                    document.getElementById('file_content').innerHTML = formattedContent;
-                    return false;
-                };
-                file_list_element.appendChild(link);
-                file_list_element.appendChild(document.createElement('br'));
-            }
-        }
-
-        async function fetch_file_content(url) {
-            const response = await fetch(url);
-            return await response.text();
-        }
-
-        fetch_files();
-    </script>
-</body>
-</html>
+            const files
