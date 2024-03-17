@@ -1,4 +1,5 @@
 About
+11 March 2023
 
 In recent months, I started proving/reflecting on my solutions to competitive programming problems after getting AC more regularly, which often involves writing stuff down in a text file. I decided to make a minimal website to hold these for convenient viewing for myself later, and (mostly) just to have a cool archive of interesting problems I've solved.
 
