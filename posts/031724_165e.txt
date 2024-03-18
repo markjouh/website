@@ -6,8 +6,8 @@ So for each subset of the 22 (~log2(4e6)) bits, we want to be able to check whet
 
 Let's compute dp[mask] = any submask present in the array, if it exists. The submask can be equal to the mask if there exists a[i] = mask. Otherwise, it's less, meaning it must be a submask of mask with a bit flipped off. This forms a DAG structure that we can simply iterate upwards on for a topological ordering.
 
+Problem:
+https://codeforces.com/contest/165/problem/E
+
 Submission:
 https://codeforces.com/contest/165/submission/252004640
-
-Links:
-https://codeforces.com/contest/165/problem/E

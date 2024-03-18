@@ -1,0 +1,18 @@
+Congruence Relation
+17 March 2023
+
+Since a^(p - 1) = 1 (mod p), a^n has a period of p - 1.
+Because p is small at ~1e6, we can fix n (mod p - 1).
+Of those n, we also need n = b / a^n (mod p).
+
+How do we actually count this?
+We can take advantage of the fact that the modulos are adjacent. When we step n forward by p - 1, n (mod p - 1) stays the same, but n (mod p) is decremented. 
+
+Using these observations, we can form a solution.
+Try fixing n as everything in [0, p - 1)
+Add p - 1 while n != b / a^n (mod p)
+We can take all n from here in increments of p * (p - 1).
+
+This was pretty tedious...
+
+https://codeforces.com/contest/919/submission/252011935
