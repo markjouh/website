@@ -1,0 +1,19 @@
+USACO 2021 December Contest, Gold - Problem 1. Paired Up
+
+If there exists a valid pairing for a subset of cows, (1, 2), (3, 4) is always valid.
+Proof: otherwise, there must be a gap somewhere with length > k, which divides the cows into two independent sets with odd size.
+
+View the cows in segments seperated by gaps > k. We can solve for each segment independently.
+
+To minimize the weight of unpaired cows:
+We obviously never need to remove any cows from segments of even size.
+For segments of odd size, we only need to remove 1.
+Proof: for a valid set of removals with size > 1, we can take the first one only and leave an even suffix.
+
+To maximize the weight of unpaired cows:
+This one is a little more involved... I thought of a bunch of ideas, but most of them would be very annoying to implement.
+Let's try building the array out of AA, B, and ABA.
+From here, instead of explicitly adding AAs, just place Bs and ABAs such that the gaps are of even length.
+We can do dp left to right based on the last "piece" we placed.
+
+https://pastebin.com/gjLt7tG6
