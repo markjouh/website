@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xinyun (Mark) Zhou</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Central container with focused content -->
+    <div class="central-column">
+        <!-- Terminal header with LED matrix -->
+        <header class="terminal-header">
+            <div class="led-matrix">
+                <canvas id="led-display" width="400" height="20"></canvas>
+            </div>
+            <nav class="file-tabs">
+                <button class="tab active" data-section="about">README</button>
+                <button class="tab" data-section="work">projects</button>
+                <button class="tab" data-section="contact">contact</button>
+                <div class="theme-switch-wrapper">
+                    <div class="theme-switch">
+                        <input type="checkbox" id="theme-toggle" />
+                        <label for="theme-toggle" class="theme-switch-label">
+                            <span class="switch-text dark">DARK</span>
+                            <div class="switch-slider">
+                                <div class="switch-handle">
+                                    <div class="handle-indent"></div>
+                                </div>
+                            </div>
+                            <span class="switch-text light">LIGHT</span>
+                        </label>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main content area with dense information layout -->
+        <main class="content-area">
+            <!-- About section with LaTeX-style formatting -->
+            <section id="about" class="content-panel active">
+                <div class="latex-header">
+                    <div class="profile-icon">
+                        <img src="mark.png" alt="Profile" />
+                    </div>
+                    <h1>Xinyun (Mark) Zhou</h1>
+                    <div class="author-block">
+                        <div class="contact-line">xinyunzhouu@gmail.com • github.com/markjouh • Newtown, PA</div>
+                    </div>
+                </div>
+                
+                <div class="resume-section">
+                    <h2 class="section-title">Education</h2>
+                    <div class="education-entry">
+                        <div class="entry-header">
+                            <span class="institution">George School</span>
+                            <span class="date">Expected May 2025</span>
+                        </div>
+                        <div class="entry-details">
+                            <p>High School Senior • Newtown, PA</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-section">
+                    <h2 class="section-title">Technical Achievements</h2>
+                    <div class="achievement-entry">
+                        <div class="entry-header">
+                            <span class="achievement-title">Codeforces Master</span>
+                            <span class="achievement-value">Rating: 2219</span>
+                        </div>
+                        <p class="achievement-desc">Achieved Master rank through consistent performance in competitive programming contests, solving complex algorithmic problems under time constraints.</p>
+                    </div>
+                    <div class="achievement-entry">
+                        <div class="entry-header">
+                            <span class="achievement-title">USACO Platinum Division</span>
+                            <span class="achievement-value">Highest Division</span>
+                        </div>
+                        <p class="achievement-desc">Qualified for the most advanced division of the USA Computing Olympiad, demonstrating expertise in algorithms and data structures.</p>
+                    </div>
+                </div>
+
+                <div class="resume-section">
+                    <h2 class="section-title">Skills & Interests</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Languages & Tools</h3>
+                            <p>C++, Python, Prompt Engineering, Agentic Coding Tools</p>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Domains</h3>
+                            <p>Machine Learning, Algorithm Design, Systems Programming</p>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Interests</h3>
+                            <p>Roguelike Games, Drawing, Anime</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-box">
+                    <p>High school senior passionate about computer science, with strong background in competitive programming and growing interest in machine learning. Seeking opportunities to apply algorithmic thinking to real-world problems.</p>
+                </div>
+            </section>
+
+            <!-- Work section with file tree and Bloomberg-style data -->
+            <section id="work" class="content-panel">
+                <div class="split-view">
+                    <div class="file-browser">
+                        <div class="path-bar">/home/projects/</div>
+                        <div class="file-tree">
+                            <div class="tree-entry file">
+                                <span class="icon">●</span> Loading repositories...
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metrics-panel">
+                        <h3>PROJECT_INFO</h3>
+                        <table class="data-table">
+                            <tr>
+                                <td class="ticker">LOADING</td>
+                                <td class="value">...</td>
+                                <td class="trend">—</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- Contact section with terminal -->
+            <section id="contact" class="content-panel">
+                <div class="terminal-window">
+                    <div class="terminal-window-header">
+                        <span class="terminal-title">bash — 80×24</span>
+                    </div>
+                    <div class="terminal-body">
+                        <pre class="terminal-content"><span class="prompt">$</span> cat contact.txt
+<span class="output">EMAIL:    xinyunzhouu@gmail.com
+GITHUB:   github.com/markjouh
+DISCORD:  markjouh</span>
+
+<span class="prompt">$</span> <span class="cursor">█</span></pre>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="terminal-footer">
+            <div class="status-bar">
+                <span class="status-item">UTF-8</span>
+                <span class="separator">|</span>
+                <span class="status-item" id="time">00:00:00</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
