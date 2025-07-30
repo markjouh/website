@@ -412,8 +412,18 @@ document.head.appendChild(style);
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
-// Check for saved theme preference or default to dark mode
-const currentTheme = localStorage.getItem('theme') || 'dark';
+// Function to get system theme preference
+function getSystemTheme() {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        return 'light';
+    }
+    return 'dark';
+}
+
+// Check for saved theme preference, otherwise use system preference
+const savedTheme = localStorage.getItem('theme');
+const currentTheme = savedTheme || getSystemTheme();
+
 if (currentTheme === 'light') {
     body.classList.add('light-mode');
     themeToggle.checked = true;
@@ -427,5 +437,19 @@ themeToggle.addEventListener('change', () => {
     } else {
         body.classList.remove('light-mode');
         localStorage.setItem('theme', 'dark');
+    }
+});
+
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    // Only update if user hasn't manually set a preference
+    if (!localStorage.getItem('theme')) {
+        if (e.matches) {
+            body.classList.add('light-mode');
+            themeToggle.checked = true;
+        } else {
+            body.classList.remove('light-mode');
+            themeToggle.checked = false;
+        }
     }
 });
