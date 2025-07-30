@@ -40,6 +40,14 @@
     --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
     --font-size-base: 14px;
     --line-height: 1.6;
+    
+    /* Spacing system */
+    --space-xs: 5px;
+    --space-sm: 10px;
+    --space-md: 15px;
+    --space-lg: 20px;
+    --space-xl: 30px;
+    --space-2xl: 40px;
 }
 
 /* Light theme */
@@ -72,6 +80,56 @@ body {
     background: var(--bg-primary);
     overflow-x: hidden;
 }
+
+/* Utility Classes */
+/* Borders */
+.border-standard { border: 1px solid var(--border-color); }
+.border-top { border-top: 1px solid var(--border-color); }
+.border-bottom { border-bottom: 1px solid var(--border-color); }
+.border-none { border: none; }
+
+/* Backgrounds */
+.bg-primary { background: var(--bg-primary); }
+.bg-secondary { background: var(--bg-secondary); }
+.bg-tertiary { background: var(--bg-tertiary); }
+
+/* Typography */
+.font-serif { font-family: var(--font-serif); }
+.font-mono { font-family: var(--font-mono); }
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-dim { color: var(--text-dim); }
+.text-accent { color: var(--accent-primary); }
+
+/* Spacing - Margin */
+.m-xs { margin: var(--space-xs); }
+.m-sm { margin: var(--space-sm); }
+.m-md { margin: var(--space-md); }
+.m-lg { margin: var(--space-lg); }
+.m-xl { margin: var(--space-xl); }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* Spacing - Padding */
+.p-xs { padding: var(--space-xs); }
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+.p-xl { padding: var(--space-xl); }
+.p-2xl { padding: var(--space-2xl); }
+
+/* Display */
+.block { display: block; }
+.inline-block { display: inline-block; }
+.none { display: none; }
+.flex { display: flex; }
+.grid { display: grid; }
 
 /* Central column layout - focused content */
 .central-column {
@@ -530,18 +588,6 @@ body.light-mode .profile-icon img {
     color: var(--hot-red);
 }
 
-/* Tokyo street-style vertical text */
-.vertical-banner {
-    position: absolute;
-    right: -60px;
-    top: 50%;
-    transform: translateY(-50%) rotate(90deg);
-    transform-origin: center;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    opacity: 0.8;
-}
 
 .jp-text {
     font-size: 18px;
@@ -667,10 +713,6 @@ body.light-mode .profile-icon img {
     51%, 100% { opacity: 0; }
 }
 
-/* Glowing text effect - removed, keeping class for compatibility */
-.glow {
-    /* No glow effect */
-}
 
 /* Highlight for achievements */
 .highlight {
@@ -838,24 +880,37 @@ body.light-mode .switch-handle {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .vertical-banner {
-        display: none;
-    }
 }
 
 /* Print stylesheet - LaTeX paper style */
 @media print {
-    /* Reset to white background, black text */
-    * {
-        background: white !important;
-        color: black !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
+    /* Print-specific variables */
+    :root {
+        --print-border: 1pt solid #000;
+        --print-spacing-xs: 2pt;
+        --print-spacing-sm: 5pt;
+        --print-spacing-md: 10pt;
+        --print-spacing-lg: 15pt;
+        --print-spacing-xl: 20pt;
+        --print-font-size-xs: 8pt;
+        --print-font-size-sm: 9pt;
+        --print-font-size-base: 11pt;
+        --print-font-size-lg: 12pt;
+        --print-font-size-xl: 14pt;
+        --print-font-size-xxl: 20pt;
+    }
+    
+    /* Force clean print colors on content elements */
+    body, .content-panel, .latex-content, section, article {
+        background: white;
+        color: black;
+        box-shadow: none;
+        text-shadow: none;
     }
     
     body {
-        font-family: 'Computer Modern Serif', 'Times New Roman', serif;
-        font-size: 11pt;
+        font-family: var(--font-serif);
+        font-size: var(--print-font-size-base);
         line-height: 1.4;
         margin: 0;
         padding: 0;
@@ -867,7 +922,6 @@ body.light-mode .switch-handle {
     .theme-switch-wrapper,
     .file-tabs,
     .led-matrix,
-    .vertical-banner,
     .cursor,
     .prompt,
     .activity-graph {
@@ -892,34 +946,42 @@ body.light-mode .switch-handle {
     
     /* Resume headers */
     h1 {
-        font-size: 20pt;
+        font-size: var(--print-font-size-xl);
         font-weight: bold;
-        margin: 0 0 5pt 0;
+        margin: 0 0 var(--print-spacing-sm) 0;
         text-align: center;
     }
     
     h2 {
-        font-size: 11pt;
+        font-size: var(--print-font-size-base);
         font-weight: bold;
-        margin: 15pt 0 8pt 0;
+        margin: var(--print-spacing-lg) 0 var(--print-spacing-md) 0;
         text-transform: uppercase;
-        border-bottom: 1pt solid #000;
-        padding-bottom: 3pt;
+        border-bottom: var(--print-border);
+        padding-bottom: var(--print-spacing-xs);
     }
     
     /* Author block */
     .author-block {
         text-align: center;
-        margin: 10pt 0 20pt 0;
+        margin: var(--print-spacing-md) 0 var(--print-spacing-xl) 0;
     }
     
     .author-name {
-        font-size: 14pt;
+        font-size: var(--print-font-size-xl);
+    }
+    
+    .affiliation,
+    .contact-line {
+        font-size: var(--print-font-size-base);
     }
     
     .affiliation {
-        font-size: 10pt;
         font-style: italic;
+    }
+    
+    .contact-line {
+        margin: var(--print-spacing-sm) 0;
     }
     
     /* Profile image */
@@ -927,44 +989,43 @@ body.light-mode .switch-handle {
         display: none; /* Hide for cleaner print */
     }
     
-    /* Contact line */
-    .contact-line {
-        font-size: 10pt;
-        margin: 5pt 0;
-    }
-    
     /* Resume sections */
     .resume-section {
-        margin: 15pt 0;
+        margin: var(--print-spacing-lg) 0;
     }
     
     .section-title {
-        font-size: 11pt;
-        margin-bottom: 10pt;
+        font-size: var(--print-font-size-base);
+        margin-bottom: var(--print-spacing-md);
     }
     
     .entry-header {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 3pt;
+        margin-bottom: var(--print-spacing-xs);
     }
     
     .institution,
     .achievement-title {
         font-weight: bold;
-        font-size: 10pt;
+        font-size: var(--print-font-size-base);
+    }
+    
+    .date,
+    .achievement-value,
+    .achievement-desc,
+    .entry-details p {
+        font-size: var(--print-font-size-sm);
     }
     
     .date,
     .achievement-value {
-        font-size: 9pt;
         font-style: italic;
     }
     
     .achievement-desc,
     .entry-details p {
-        font-size: 9pt;
-        margin: 3pt 0 10pt 0;
+        margin: var(--print-spacing-xs) 0 var(--print-spacing-md) 0;
     }
     
     /* Skills grid - single column for print */
@@ -973,43 +1034,43 @@ body.light-mode .switch-handle {
     }
     
     .skill-category {
-        margin: 8pt 0;
+        margin: var(--print-spacing-md) 0;
     }
     
     .skill-category h3 {
         font-weight: bold;
-        font-size: 10pt;
+        font-size: var(--print-font-size-base);
         display: inline;
     }
     
     .skill-category p {
         display: inline;
-        font-size: 9pt;
-        margin-left: 5pt;
+        font-size: var(--print-font-size-sm);
+        margin-left: var(--print-spacing-sm);
     }
     
     /* Summary box */
     .summary-box {
-        margin: 15pt 0;
-        padding: 10pt;
-        border-top: 1pt solid #000;
-        border-bottom: 1pt solid #000;
+        margin: var(--print-spacing-lg) 0;
+        padding: var(--print-spacing-md);
+        border-top: var(--print-border);
+        border-bottom: var(--print-border);
         text-align: left;
-        font-size: 9pt;
+        font-size: var(--print-font-size-sm);
     }
     
     p {
         text-align: justify;
-        margin: 10pt 0;
+        margin: var(--print-spacing-md) 0;
     }
     
     /* Code blocks */
     .code-snippet {
-        border: 1pt solid #000;
-        padding: 5pt;
-        margin: 10pt 0;
-        font-family: 'Courier New', monospace;
-        font-size: 8pt;
+        border: var(--print-border);
+        padding: var(--print-spacing-sm);
+        margin: var(--print-spacing-md) 0;
+        font-family: var(--font-mono);
+        font-size: var(--print-font-size-xs);
     }
     
     /* Info grid as a table */
@@ -1017,29 +1078,33 @@ body.light-mode .switch-handle {
         display: table;
         width: 100%;
         border-collapse: collapse;
-        margin: 15pt 0;
+        margin: var(--print-spacing-lg) 0;
     }
     
     .info-cell {
         display: table-cell;
-        border: 1pt solid #000;
-        padding: 5pt;
+        border: var(--print-border);
+        padding: var(--print-spacing-sm);
     }
     
     /* Terminal window as code block */
     .terminal-window {
-        border: 1pt solid #000;
-        margin: 15pt 0;
+        border: var(--print-border);
+        margin: var(--print-spacing-lg) 0;
     }
     
     .terminal-window-header {
         display: none;
     }
     
+    .terminal-content,
+    .file-tree {
+        font-family: var(--font-mono);
+        font-size: var(--print-font-size-sm);
+    }
+    
     .terminal-content {
-        font-family: 'Courier New', monospace;
-        font-size: 9pt;
-        padding: 10pt;
+        padding: var(--print-spacing-md);
     }
     
     /* Highlights */
@@ -1054,13 +1119,8 @@ body.light-mode .switch-handle {
     }
     
     /* File tree */
-    .file-tree {
-        font-family: 'Courier New', monospace;
-        font-size: 9pt;
-    }
-    
     .tree-entry {
-        margin: 2pt 0;
+        margin: var(--print-spacing-xs) 0;
     }
     
     /* Remove interactive elements */

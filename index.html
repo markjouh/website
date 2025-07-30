@@ -9,16 +9,16 @@
 </head>
 <body>
     <!-- Central container with focused content -->
-    <div class="central-column">
+    <div class="central-column p-lg">
         <!-- Terminal header with LED matrix -->
-        <header class="terminal-header">
-            <div class="led-matrix">
+        <header class="terminal-header border-standard bg-secondary mb-lg">
+            <div class="led-matrix p-sm border-bottom">
                 <canvas id="led-display" width="400" height="20"></canvas>
             </div>
-            <nav class="file-tabs">
-                <button class="tab active" data-section="about">README</button>
-                <button class="tab" data-section="work">projects</button>
-                <button class="tab" data-section="contact">contact</button>
+            <nav class="file-tabs bg-tertiary border-top">
+                <button class="tab active font-mono text-secondary p-sm" data-section="about">README</button>
+                <button class="tab font-mono text-secondary p-sm" data-section="work">projects</button>
+                <button class="tab font-mono text-secondary p-sm" data-section="contact">contact</button>
                 <div class="theme-switch-wrapper">
                     <div class="theme-switch">
                         <input type="checkbox" id="theme-toggle" />
@@ -40,66 +40,66 @@
         <main class="content-area">
             <!-- About section with LaTeX-style formatting -->
             <section id="about" class="content-panel active">
-                <div class="latex-header">
-                    <div class="profile-icon">
+                <div class="latex-header mb-xl">
+                    <div class="profile-icon mb-lg">
                         <img src="mark.png" alt="Profile" />
                     </div>
-                    <h1>Xinyun (Mark) Zhou</h1>
-                    <div class="author-block">
-                        <div class="contact-line">xinyunzhouu@gmail.com • github.com/markjouh • Newtown, PA</div>
+                    <h1 class="font-serif mb-sm">Xinyun (Mark) Zhou</h1>
+                    <div class="author-block font-serif">
+                        <div class="contact-line font-serif text-secondary mt-sm">xinyunzhouu@gmail.com • github.com/markjouh • Newtown, PA</div>
                     </div>
                 </div>
                 
-                <div class="resume-section">
-                    <h2 class="section-title">Education</h2>
-                    <div class="education-entry">
+                <div class="resume-section bg-secondary border-standard p-lg mb-lg">
+                    <h2 class="section-title font-serif text-primary border-bottom mb-md">Education</h2>
+                    <div class="education-entry font-serif mb-md">
                         <div class="entry-header">
-                            <span class="institution">George School</span>
-                            <span class="date">Expected May 2025</span>
+                            <span class="institution text-primary">George School</span>
+                            <span class="date text-secondary">Expected May 2025</span>
                         </div>
-                        <div class="entry-details">
+                        <div class="entry-details text-secondary">
                             <p>High School Senior • Newtown, PA</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="resume-section">
-                    <h2 class="section-title">Technical Achievements</h2>
-                    <div class="achievement-entry">
+                <div class="resume-section bg-secondary border-standard p-lg mb-lg">
+                    <h2 class="section-title font-serif text-primary border-bottom mb-md">Technical Achievements</h2>
+                    <div class="achievement-entry font-serif mb-md">
                         <div class="entry-header">
-                            <span class="achievement-title">Codeforces Master</span>
-                            <span class="achievement-value">Rating: 2219</span>
+                            <span class="achievement-title text-primary">Codeforces Master</span>
+                            <span class="achievement-value text-secondary">Rating: 2219</span>
                         </div>
-                        <p class="achievement-desc">Achieved Master rank through consistent performance in competitive programming contests, solving complex algorithmic problems under time constraints.</p>
+                        <p class="achievement-desc text-secondary">Achieved Master rank through consistent performance in competitive programming contests, solving complex algorithmic problems under time constraints.</p>
                     </div>
-                    <div class="achievement-entry">
+                    <div class="achievement-entry font-serif mb-md">
                         <div class="entry-header">
-                            <span class="achievement-title">USACO Platinum Division</span>
-                            <span class="achievement-value">Highest Division</span>
+                            <span class="achievement-title text-primary">USACO Platinum Division</span>
+                            <span class="achievement-value text-secondary">Highest Division</span>
                         </div>
-                        <p class="achievement-desc">Qualified for the most advanced division of the USA Computing Olympiad, demonstrating expertise in algorithms and data structures.</p>
+                        <p class="achievement-desc text-secondary">Qualified for the most advanced division of the USA Computing Olympiad, demonstrating expertise in algorithms and data structures.</p>
                     </div>
                 </div>
 
-                <div class="resume-section">
-                    <h2 class="section-title">Skills & Interests</h2>
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h3>Languages & Tools</h3>
-                            <p>C++, Python, Prompt Engineering, Agentic Coding Tools</p>
+                <div class="resume-section bg-secondary border-standard p-lg mb-lg">
+                    <h2 class="section-title font-serif text-primary border-bottom mb-md">Skills & Interests</h2>
+                    <div class="skills-grid border-standard">
+                        <div class="skill-category bg-secondary p-md font-serif">
+                            <h3 class="text-primary mb-sm">Languages & Tools</h3>
+                            <p class="text-secondary">C++, Python, Prompt Engineering, Agentic Coding Tools</p>
                         </div>
-                        <div class="skill-category">
-                            <h3>Domains</h3>
-                            <p>Machine Learning, Algorithm Design, Systems Programming</p>
+                        <div class="skill-category bg-secondary p-md font-serif">
+                            <h3 class="text-primary mb-sm">Domains</h3>
+                            <p class="text-secondary">Machine Learning, Algorithm Design, Systems Programming</p>
                         </div>
-                        <div class="skill-category">
-                            <h3>Interests</h3>
-                            <p>Roguelike Games, Drawing, Anime</p>
+                        <div class="skill-category bg-secondary p-md font-serif">
+                            <h3 class="text-primary mb-sm">Interests</h3>
+                            <p class="text-secondary">Roguelike Games, Drawing, Anime</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="summary-box">
+                <div class="summary-box bg-secondary border-standard p-lg mt-lg font-serif text-primary">
                     <p>High school senior passionate about computer science, with strong background in competitive programming and growing interest in machine learning. Seeking opportunities to apply algorithmic thinking to real-world problems.</p>
                 </div>
             </section>
@@ -107,17 +107,17 @@
             <!-- Work section with file tree and Bloomberg-style data -->
             <section id="work" class="content-panel">
                 <div class="split-view">
-                    <div class="file-browser">
-                        <div class="path-bar">/home/projects/</div>
-                        <div class="file-tree">
+                    <div class="file-browser border-standard bg-secondary">
+                        <div class="path-bar bg-tertiary p-sm border-bottom font-mono text-secondary">/home/projects/</div>
+                        <div class="file-tree p-md">
                             <div class="tree-entry file">
                                 <span class="icon">●</span> Loading repositories...
                             </div>
                         </div>
                     </div>
                     
-                    <div class="metrics-panel">
-                        <h3>PROJECT_INFO</h3>
+                    <div class="metrics-panel border-standard bg-secondary p-md">
+                        <h3 class="font-mono text-primary mb-md">PROJECT_INFO</h3>
                         <table class="data-table">
                             <tr>
                                 <td class="ticker">LOADING</td>
@@ -133,12 +133,12 @@
 
             <!-- Contact section with terminal -->
             <section id="contact" class="content-panel">
-                <div class="terminal-window">
-                    <div class="terminal-window-header">
-                        <span class="terminal-title">bash — 80×24</span>
+                <div class="terminal-window border-standard">
+                    <div class="terminal-window-header bg-tertiary p-sm border-bottom">
+                        <span class="terminal-title font-mono text-secondary">bash — 80×24</span>
                     </div>
-                    <div class="terminal-body">
-                        <pre class="terminal-content"><span class="prompt">$</span> cat contact.txt
+                    <div class="terminal-body bg-primary p-md">
+                        <pre class="terminal-content font-mono text-primary"><span class="prompt">$</span> cat contact.txt
 <span class="output">EMAIL:    xinyunzhouu@gmail.com
 GITHUB:   github.com/markjouh
 DISCORD:  markjouh</span>
@@ -150,8 +150,8 @@ DISCORD:  markjouh</span>
         </main>
 
         <!-- Footer -->
-        <footer class="terminal-footer">
-            <div class="status-bar">
+        <footer class="terminal-footer border-top bg-secondary mt-lg">
+            <div class="status-bar p-sm font-mono text-secondary">
                 <span class="status-item">UTF-8</span>
                 <span class="separator">|</span>
                 <span class="status-item" id="time">00:00:00</span>

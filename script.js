@@ -1,5 +1,54 @@
+// Utility functions for DOM operations
+const DOM = {
+    get: (id) => document.getElementById(id),
+    update: (id, prop, value) => {
+        const el = DOM.get(id);
+        if (el) el[prop] = value;
+        return el;
+    },
+    query: (selector) => document.querySelector(selector),
+    queryAll: (selector) => document.querySelectorAll(selector)
+};
+
+// Centralized theme manager
+const Theme = {
+    isLight: () => document.body.classList.contains('light-mode'),
+    getColor: (dark, light) => Theme.isLight() ? light : dark,
+    toggle: () => {
+        document.body.classList.toggle('light-mode');
+        const isLight = Theme.isLight();
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        return isLight;
+    },
+    init: () => {
+        const saved = localStorage.getItem('theme');
+        const system = window.matchMedia?.('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        const theme = saved || system;
+        if (theme === 'light') {
+            document.body.classList.add('light-mode');
+            const toggle = DOM.get('theme-toggle');
+            if (toggle) toggle.checked = true;
+        }
+    }
+};
+
+// Animation loop helper
+const Animation = {
+    loop: (fn, delay = 0) => {
+        const animate = () => {
+            fn();
+            if (delay > 0) {
+                setTimeout(animate, delay);
+            } else {
+                requestAnimationFrame(animate);
+            }
+        };
+        animate();
+    }
+};
+
 // LED Matrix display animation
-const ledCanvas = document.getElementById('led-display');
+const ledCanvas = DOM.get('led-display');
 const ledCtx = ledCanvas ? ledCanvas.getContext('2d') : null;
 
 // LED matrix configuration
@@ -35,52 +84,33 @@ if (ledCtx) {
     window.addEventListener('resize', updateLEDSize);
     
     // Character bitmaps - unique stylized font (5x4)
-    const charMap = {
-        'A': [[0,1,1,0],[1,0,0,1],[1,1,1,1],[1,0,0,1],[1,0,0,1]],
-        'B': [[1,1,1,0],[1,0,0,1],[1,1,1,0],[1,0,0,1],[1,1,1,0]],
-        'C': [[0,1,1,1],[1,0,0,0],[1,0,0,0],[1,0,0,0],[0,1,1,1]],
-        'D': [[1,1,1,0],[1,0,0,1],[1,0,0,1],[1,0,0,1],[1,1,1,0]],
-        'E': [[1,1,1,1],[1,0,0,0],[1,1,1,0],[1,0,0,0],[1,1,1,1]],
-        'F': [[1,1,1,1],[1,0,0,0],[1,1,1,0],[1,0,0,0],[1,0,0,0]],
-        'G': [[0,1,1,1],[1,0,0,0],[1,0,1,1],[1,0,0,1],[0,1,1,1]],
-        'H': [[1,0,0,1],[1,0,0,1],[1,1,1,1],[1,0,0,1],[1,0,0,1]],
-        'I': [[1,1,1,0],[0,1,0,0],[0,1,0,0],[0,1,0,0],[1,1,1,0]],
-        'J': [[0,1,1,1],[0,0,1,0],[0,0,1,0],[1,0,1,0],[0,1,0,0]],
-        'K': [[1,0,0,1],[1,0,1,0],[1,1,0,0],[1,0,1,0],[1,0,0,1]],
-        'L': [[1,0,0,0],[1,0,0,0],[1,0,0,0],[1,0,0,0],[1,1,1,1]],
-        'M': [[1,0,0,1],[1,1,1,1],[1,0,0,1],[1,0,0,1],[1,0,0,1]],
-        'N': [[1,0,0,1],[1,1,0,1],[1,0,1,1],[1,0,0,1],[1,0,0,1]],
-        'O': [[0,1,1,0],[1,0,0,1],[1,0,0,1],[1,0,0,1],[0,1,1,0]],
-        'P': [[1,1,1,0],[1,0,0,1],[1,1,1,0],[1,0,0,0],[1,0,0,0]],
-        'Q': [[0,1,1,0],[1,0,0,1],[1,0,0,1],[1,0,1,0],[0,1,0,1]],
-        'R': [[1,1,1,0],[1,0,0,1],[1,1,1,0],[1,0,1,0],[1,0,0,1]],
-        'S': [[0,1,1,1],[1,0,0,0],[0,1,1,0],[0,0,0,1],[1,1,1,0]],
-        'T': [[1,1,1,1],[0,1,0,0],[0,1,0,0],[0,1,0,0],[0,1,0,0]],
-        'U': [[1,0,0,1],[1,0,0,1],[1,0,0,1],[1,0,0,1],[0,1,1,0]],
-        'V': [[1,0,0,1],[1,0,0,1],[1,0,0,1],[0,1,1,0],[0,1,0,0]],
-        'W': [[1,0,0,1],[1,0,0,1],[1,0,0,1],[1,1,1,1],[1,0,0,1]],
-        'X': [[1,0,0,1],[0,1,1,0],[0,1,1,0],[0,1,1,0],[1,0,0,1]],
-        'Y': [[1,0,0,1],[0,1,1,0],[0,1,0,0],[0,1,0,0],[0,1,0,0]],
-        'Z': [[1,1,1,1],[0,0,0,1],[0,0,1,0],[0,1,0,0],[1,1,1,1]],
-        '0': [[0,1,1,0],[1,0,0,1],[1,0,0,1],[1,0,0,1],[0,1,1,0]],
-        '1': [[0,1,0,0],[1,1,0,0],[0,1,0,0],[0,1,0,0],[1,1,1,0]],
-        '2': [[0,1,1,0],[1,0,0,1],[0,0,1,0],[0,1,0,0],[1,1,1,1]],
-        '3': [[1,1,1,0],[0,0,0,1],[0,1,1,0],[0,0,0,1],[1,1,1,0]],
-        '4': [[1,0,0,1],[1,0,0,1],[1,1,1,1],[0,0,0,1],[0,0,0,1]],
-        '5': [[1,1,1,1],[1,0,0,0],[1,1,1,0],[0,0,0,1],[1,1,1,0]],
-        '6': [[0,1,1,0],[1,0,0,0],[1,1,1,0],[1,0,0,1],[0,1,1,0]],
-        '7': [[1,1,1,1],[0,0,0,1],[0,0,1,0],[0,1,0,0],[0,1,0,0]],
-        '8': [[0,1,1,0],[1,0,0,1],[0,1,1,0],[1,0,0,1],[0,1,1,0]],
-        '9': [[0,1,1,0],[1,0,0,1],[0,1,1,1],[0,0,0,1],[0,1,1,0]],
-        ' ': [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],
-        ':': [[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,1,0,0],[0,0,0,0]],
-        '/': [[0,0,0,1],[0,0,1,0],[0,1,0,0],[1,0,0,0],[1,0,0,0]],
-        '-': [[0,0,0,0],[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]],
-        '_': [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,1,1,1]],
-        '.': [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,1,0,0]],
-        '@': [[0,1,1,0],[1,0,0,1],[1,0,1,1],[1,0,0,0],[0,1,1,1]],
-        '♦': [[0,1,0,0],[1,1,1,0],[0,1,0,0],[0,0,0,0],[0,0,0,0]]
+    // Compressed format: each character is a 20-bit value (5 rows x 4 cols)
+    const charMapData = {
+        'A': 0x69F99, 'B': 0xE9E9E, 'C': 0x78887, 'D': 0xE999E, 'E': 0xF8E8F,
+        'F': 0xF8E88, 'G': 0x78B97, 'H': 0x99F99, 'I': 0xE4447, 'J': 0x72254,
+        'K': 0x9ACA9, 'L': 0x8888F, 'M': 0x9F999, 'N': 0x9DB99, 'O': 0x69996,
+        'P': 0xE9E88, 'Q': 0x699A5, 'R': 0xE9EA9, 'S': 0x78617, 'T': 0xF4444,
+        'U': 0x99996, 'V': 0x99964, 'W': 0x999F9, 'X': 0x96669, 'Y': 0x96444,
+        'Z': 0xF124F, '0': 0x69996, '1': 0x4C447, '2': 0x69248, '3': 0xE161E,
+        '4': 0x99F11, '5': 0xF8E1E, '6': 0x68E96, '7': 0xF1244, '8': 0x69696,
+        '9': 0x6971E, ' ': 0x00000, ':': 0x04040, '/': 0x12488, '-': 0x00F00,
+        '_': 0x0000F, '.': 0x00001, '@': 0x69B87, '♦': 0x4E400
     };
+    
+    // Convert compressed data to bitmap array
+    const charMap = {};
+    for (const [char, data] of Object.entries(charMapData)) {
+        const bitmap = [];
+        for (let row = 0; row < 5; row++) {
+            const rowData = [];
+            for (let col = 0; col < 4; col++) {
+                const bit = (data >> (19 - (row * 4 + col))) & 1;
+                rowData.push(bit);
+            }
+            bitmap.push(rowData);
+        }
+        charMap[char] = bitmap;
+    }
     
     // Convert text to LED matrix
     function textToMatrix(text) {
@@ -104,8 +134,7 @@ if (ledCtx) {
     
     function drawLEDMatrix() {
         // Clear canvas - match background to theme
-        const isLightMode = document.body.classList.contains('light-mode');
-        ledCtx.fillStyle = isLightMode ? '#333' : '#000';
+        ledCtx.fillStyle = Theme.getColor('#000', '#333');
         ledCtx.fillRect(0, 0, ledCanvas.width, ledCanvas.height);
         
         // Draw all LED dots
@@ -132,7 +161,7 @@ if (ledCtx) {
                     ledCtx.shadowBlur = 0;
                 } else {
                     // Unlit LED - adjust for theme
-                    ledCtx.fillStyle = isLightMode ? '#555' : '#222';
+                    ledCtx.fillStyle = Theme.getColor('#222', '#555');
                     ledCtx.shadowBlur = 0;
                 }
                 
@@ -149,15 +178,14 @@ if (ledCtx) {
             textMatrix = textToMatrix(messages[currentMessage]);
         }
         
-        requestAnimationFrame(drawLEDMatrix);
     }
     
-    drawLEDMatrix();
+    Animation.loop(drawLEDMatrix);
 }
 
 // Tab switching
-const tabs = document.querySelectorAll('.tab');
-const sections = document.querySelectorAll('.content-panel');
+const tabs = DOM.queryAll('.tab');
+const sections = DOM.queryAll('.content-panel');
 
 tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -181,19 +209,15 @@ tabs.forEach(tab => {
 function updateTime() {
     const now = new Date();
     const timeString = now.toTimeString().split(' ')[0];
-    const timeElement = document.getElementById('time');
-    if (timeElement) {
-        timeElement.textContent = timeString;
-    }
+    DOM.update('time', 'textContent', timeString);
 }
 
 setInterval(updateTime, 1000);
 updateTime();
 
-// Activity graph initialization moved to initActivityGraph()
 
 // Terminal cursor blink
-const cursor = document.querySelector('.cursor');
+const cursor = DOM.query('.cursor');
 if (cursor) {
     setInterval(() => {
         cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
@@ -255,7 +279,7 @@ function updateGitHubMetrics(userData, reposData) {
         </div>
     `;
     
-    const metricsPanel = document.querySelector('.metrics-panel');
+    const metricsPanel = DOM.query('.metrics-panel');
     if (metricsPanel) {
         metricsPanel.innerHTML = metricsHTML;
     }
@@ -263,35 +287,35 @@ function updateGitHubMetrics(userData, reposData) {
 
 function updateProjectTree(reposData) {
     const fileTreeHTML = reposData.slice(0, 5).map((repo, index) => `
-        <div class="tree-entry directory" data-index="${index}">
-            <span class="icon">▼</span> ${repo.name}/
-            <span class="meta">${repo.language || 'misc'}</span>
+        <div class='tree-entry directory' data-index='${index}'>
+            <span class='icon'>▼</span> ${repo.name}/
+            <span class='meta'>${repo.language || 'misc'}</span>
         </div>
-        <div class="tree-children" id="children-${index}" style="display: block;">
+        <div class='tree-children' id='children-${index}' style='display: block;'>
             <div class="tree-entry file">
-                <span class="icon">●</span> README.md
-                <span class="meta">${formatSize(repo.size)}</span>
+                <span class='icon'>●</span> README.md
+                <span class='meta'>${formatSize(repo.size)}</span>
             </div>
             ${repo.language ? `<div class="tree-entry file">
-                <span class="icon">●</span> ${getMainFile(repo.language)}
-                <span class="meta">${repo.language}</span>
+                <span class='icon'>●</span> ${getMainFile(repo.language)}
+                <span class='meta'>${repo.language}</span>
             </div>` : ''}
             ${repo.has_pages ? `<div class="tree-entry file">
-                <span class="icon">●</span> index.html
-                <span class="meta">pages</span>
+                <span class='icon'>●</span> index.html
+                <span class='meta'>pages</span>
             </div>` : ''}
         </div>
     `).join('');
     
-    const fileTree = document.querySelector('.file-tree');
+    const fileTree = DOM.query('.file-tree');
     if (fileTree) {
         fileTree.innerHTML = fileTreeHTML;
         
         // Add click handlers for directories
-        document.querySelectorAll('.tree-entry.directory').forEach(dir => {
+        DOM.queryAll('.tree-entry.directory').forEach(dir => {
             dir.addEventListener('click', () => {
                 const index = dir.getAttribute('data-index');
-                const children = document.getElementById(`children-${index}`);
+                const children = DOM.get(`children-${index}`);
                 const icon = dir.querySelector('.icon');
                 
                 if (children.style.display === 'none') {
@@ -326,52 +350,6 @@ function formatSize(sizeInKB) {
     return (sizeInKB / 1000).toFixed(1) + 'M';
 }
 
-// Initialize activity graph separately
-function initActivityGraph() {
-    const activityCanvas = document.getElementById('activity');
-    const activityCtx = activityCanvas ? activityCanvas.getContext('2d') : null;
-
-    if (activityCtx) {
-        const data = [];
-        for (let i = 0; i < 50; i++) {
-            data.push(Math.random() * 40 + 10);
-        }
-        
-        function drawActivityGraph() {
-            activityCtx.clearRect(0, 0, activityCanvas.width, activityCanvas.height);
-            
-            // Create gradient for the line
-            const gradient = activityCtx.createLinearGradient(0, 0, activityCanvas.width, 0);
-            gradient.addColorStop(0, '#8338ec');
-            gradient.addColorStop(0.5, '#00f5ff');
-            gradient.addColorStop(1, '#06ffa5');
-            
-            activityCtx.strokeStyle = gradient;
-            activityCtx.lineWidth = 2;
-            
-            activityCtx.beginPath();
-            data.forEach((value, index) => {
-                const x = (index / data.length) * activityCanvas.width;
-                const y = activityCanvas.height - value;
-                
-                if (index === 0) {
-                    activityCtx.moveTo(x, y);
-                } else {
-                    activityCtx.lineTo(x, y);
-                }
-            });
-            activityCtx.stroke();
-            
-            // Update data
-            data.shift();
-            data.push(Math.random() * 40 + 10);
-            
-            setTimeout(drawActivityGraph, 100);
-        }
-        
-        drawActivityGraph();
-    }
-}
 
 // Call fetchGitHubData when the page loads
 if (document.readyState === 'loading') {
@@ -409,47 +387,26 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Theme switching
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
+const themeToggle = DOM.get('theme-toggle');
 
-// Function to get system theme preference
-function getSystemTheme() {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        return 'light';
-    }
-    return 'dark';
-}
-
-// Check for saved theme preference, otherwise use system preference
-const savedTheme = localStorage.getItem('theme');
-const currentTheme = savedTheme || getSystemTheme();
-
-if (currentTheme === 'light') {
-    body.classList.add('light-mode');
-    themeToggle.checked = true;
-}
+// Initialize theme
+Theme.init();
 
 // Theme toggle handler
-themeToggle.addEventListener('change', () => {
-    if (themeToggle.checked) {
-        body.classList.add('light-mode');
-        localStorage.setItem('theme', 'light');
-    } else {
-        body.classList.remove('light-mode');
-        localStorage.setItem('theme', 'dark');
-    }
-});
+if (themeToggle) {
+    themeToggle.addEventListener('change', () => {
+        Theme.toggle();
+        themeToggle.checked = Theme.isLight();
+    });
+}
 
 // Listen for system theme changes
-window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+window.matchMedia?.('(prefers-color-scheme: light)').addEventListener('change', (e) => {
     // Only update if user hasn't manually set a preference
     if (!localStorage.getItem('theme')) {
-        if (e.matches) {
-            body.classList.add('light-mode');
-            themeToggle.checked = true;
-        } else {
-            body.classList.remove('light-mode');
-            themeToggle.checked = false;
+        if (e.matches !== Theme.isLight()) {
+            Theme.toggle();
+            if (themeToggle) themeToggle.checked = Theme.isLight();
         }
     }
 });
