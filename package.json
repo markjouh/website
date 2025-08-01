@@ -7,6 +7,6 @@
     "build-blog": "node scripts/build-blog.js"
   },
   "dependencies": {
-    "marked": "^14.0.0"
+    "marked": "^14.1.4"
   }
 }
