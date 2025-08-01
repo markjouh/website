@@ -1,0 +1,68 @@
+/* Layout Components */
+
+/* Central column layout - focused content */
+.central-column {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Content sections */
+.content-area {
+    flex: 1;
+    position: relative;
+}
+
+.content-panel {
+    display: none;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.content-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Terminal header with LED matrix */
+.terminal-header {
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    margin-bottom: 20px;
+}
+
+/* Terminal footer */
+.terminal-footer {
+    margin-top: 40px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+}
+
+.status-bar {
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.status-item {
+    margin: 0 5px;
+}
+
+.separator {
+    margin: 0 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .central-column {
+        padding: 10px;
+    }
+}

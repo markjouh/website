@@ -1,3 +1,9 @@
+---
+title: Welcome to My Blog
+date: 2025-08-01
+excerpt: Hello! I'm Mark, and this is my personal blog where I'll be sharing my journey through computer science, competitive programming, and various tech adventures.
+---
+
 # Welcome to My Blog
 
 Hello! I'm Mark, and this is my personal blog where I'll be sharing my journey through computer science, competitive programming, and various tech adventures.

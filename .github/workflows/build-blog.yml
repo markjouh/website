@@ -1,0 +1,31 @@
+name: Build Blog Index
+
+on:
+  push:
+    paths:
+      - 'posts/*.md'
+      - 'scripts/build-blog.js'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Generate blog index
+      run: node scripts/build-blog.js
+    
+    - name: Commit and push if changed
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        git add -A
+        git diff --quiet && git diff --staged --quiet || git commit -m "Update blog index"
+        git push

@@ -1,0 +1,63 @@
+:root {
+    /* Dark theme (default) */
+    --bg-primary: #0d0d0d;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #242424;
+    --text-primary: #e4e4e4;
+    --text-secondary: #a0a0a0;
+    --text-dim: #666;
+    
+    /* Vibrant accent palette */
+    --neon-pink: #ff006e;
+    --neon-cyan: #00f5ff;
+    --neon-purple: #8338ec;
+    --neon-green: #06ffa5;
+    --warm-orange: #ff7f11;
+    --electric-blue: #3a86ff;
+    --hot-red: #ff0030;
+    --accent-yellow: #ffbe0b;
+    
+    /* Functional colors */
+    --accent-primary: var(--neon-cyan);
+    --accent-secondary: var(--neon-pink);
+    --accent-success: var(--neon-green);
+    --accent-warning: var(--warm-orange);
+    --accent-info: var(--electric-blue);
+    --border-color: #2a2a2a;
+    
+    /* Typography */
+    --font-serif: 'Computer Modern Serif', 'Georgia', serif;
+    --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+    --font-size-base: 14px;
+    --line-height: 1.6;
+    
+    /* Spacing system */
+    --space-xs: 5px;
+    --space-sm: 10px;
+    --space-md: 15px;
+    --space-lg: 20px;
+    --space-xl: 30px;
+    --space-2xl: 40px;
+}
+
+/* Light theme */
+body.light-mode {
+    --bg-primary: #fafafa;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f5f5f5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-dim: #999999;
+    
+    /* Adjusted accents for light mode */
+    --neon-pink: #e6005a;
+    --neon-cyan: #0099a8;
+    --neon-purple: #6b2bc7;
+    --neon-green: #00a865;
+    --warm-orange: #e06b00;
+    --electric-blue: #2968cc;
+    --hot-red: #dc002a;
+    --accent-yellow: #cc9600;
+    
+    --border-color: #e0e0e0;
+}

@@ -1,0 +1,162 @@
+/* Print stylesheet - LaTeX paper style */
+@media print {
+    /* Print-specific variables */
+    :root {
+        --print-border: 1pt solid #000;
+        --print-spacing-xs: 2pt;
+        --print-spacing-sm: 5pt;
+        --print-spacing-md: 10pt;
+        --print-spacing-lg: 15pt;
+        --print-spacing-xl: 20pt;
+        --print-font-size-xs: 8pt;
+        --print-font-size-sm: 9pt;
+        --print-font-size-base: 11pt;
+        --print-font-size-lg: 12pt;
+        --print-font-size-xl: 14pt;
+        --print-font-size-xxl: 20pt;
+    }
+    
+    /* Force clean print colors on content elements */
+    body, .content-panel, .latex-content, section, article {
+        background: white;
+        color: black;
+        box-shadow: none;
+        text-shadow: none;
+    }
+    
+    body {
+        font-family: var(--font-serif);
+        font-size: var(--print-font-size-base);
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Hide navigation and interactive elements */
+    .terminal-header,
+    .terminal-footer,
+    .theme-switch-wrapper,
+    .file-tabs,
+    .led-matrix,
+    .cursor,
+    .prompt,
+    .activity-graph {
+        display: none !important;
+    }
+    
+    /* Page setup */
+    .central-column {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Show only active section */
+    .content-panel {
+        display: none !important;
+    }
+    
+    .content-panel.active {
+        display: block !important;
+    }
+    
+    /* Resume headers */
+    h1 {
+        font-size: var(--print-font-size-xl);
+        font-weight: bold;
+        margin: 0 0 var(--print-spacing-sm) 0;
+        text-align: center;
+    }
+    
+    h2 {
+        font-size: var(--print-font-size-base);
+        font-weight: bold;
+        margin: var(--print-spacing-lg) 0 var(--print-spacing-md) 0;
+        text-transform: uppercase;
+        border-bottom: var(--print-border);
+        padding-bottom: var(--print-spacing-xs);
+    }
+    
+    /* Profile image */
+    .profile-icon {
+        display: none;
+    }
+    
+    /* Resume sections */
+    .resume-section {
+        margin: var(--print-spacing-lg) 0;
+    }
+    
+    .section-title {
+        font-size: var(--print-font-size-base);
+        margin-bottom: var(--print-spacing-md);
+    }
+    
+    .entry-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: var(--print-spacing-xs);
+    }
+    
+    .institution,
+    .achievement-title {
+        font-weight: bold;
+        font-size: var(--print-font-size-base);
+    }
+    
+    .date,
+    .achievement-value,
+    .achievement-desc,
+    .entry-details p {
+        font-size: var(--print-font-size-sm);
+    }
+    
+    .date,
+    .achievement-value {
+        font-style: italic;
+    }
+    
+    .achievement-desc,
+    .entry-details p {
+        margin: var(--print-spacing-xs) 0 var(--print-spacing-md) 0;
+    }
+    
+    /* Skills grid - single column for print */
+    .skills-grid {
+        display: block;
+    }
+    
+    .skill-category {
+        margin: var(--print-spacing-md) 0;
+    }
+    
+    .skill-category h3 {
+        font-weight: bold;
+        font-size: var(--print-font-size-base);
+        display: inline;
+    }
+    
+    .skill-category p {
+        display: inline;
+        font-size: var(--print-font-size-sm);
+        margin-left: var(--print-spacing-sm);
+    }
+    
+    p {
+        text-align: justify;
+        margin: var(--print-spacing-md) 0;
+    }
+    
+    /* Page breaks */
+    .content-panel {
+        page-break-after: always;
+    }
+    
+    /* Footer for page numbers */
+    @page {
+        margin: 1in;
+        @bottom-center {
+            content: counter(page);
+        }
+    }
+}

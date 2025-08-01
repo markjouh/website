@@ -1,0 +1,14 @@
+[
+  {
+    "file": "sample-post.md",
+    "title": "How to Use This Blog System",
+    "date": "2025-08-01",
+    "excerpt": "A quick guide on how to add new blog posts using markdown files with front matter"
+  },
+  {
+    "file": "welcome.md",
+    "title": "Welcome to My Blog",
+    "date": "2025-08-01",
+    "excerpt": "Hello! I'm Mark, and this is my personal blog where I'll be sharing my journey through computer science, competitive programming, and various tech adventures."
+  }
+]
