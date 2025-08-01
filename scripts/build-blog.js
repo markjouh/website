@@ -83,7 +83,6 @@ function buildBlogIndex() {
             date: frontMatter.date,
             excerpt: frontMatter.excerpt,
             content: htmlContent,  // Pre-parsed HTML content
-            markdown: markdownContent,  // Original markdown (optional, can remove if not needed)
             ...frontMatter
         };
     });
@@ -91,10 +90,13 @@ function buildBlogIndex() {
     // Sort by date (newest first)
     posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     
-    // Write the blog posts file
-    fs.writeFileSync(outputFile, JSON.stringify(posts, null, 2));
+    // Write the blog posts file (minified)
+    fs.writeFileSync(outputFile, JSON.stringify(posts));
     
-    console.log(`Generated ${outputFile} with ${posts.length} posts`);
+    const fileSize = fs.statSync(outputFile).size;
+    const prettySizeKB = (fileSize / 1024).toFixed(1);
+    
+    console.log(`Generated ${outputFile} (${prettySizeKB}KB) with ${posts.length} posts`);
     console.log('Posts:', posts.map(p => `- ${p.title} (${p.file})`).join('\n'));
 }
 
