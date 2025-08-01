@@ -1,6 +1,6 @@
 ---
 title: How to Use This Blog System
-date: 2025-08-01
+date: 2025-01-08
 excerpt: A quick guide on how to add new blog posts using markdown files with front matter
 ---
 
