@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { marked } = require('marked');
 
 // Parse front matter from markdown content
 function parseFrontMatter(content) {
@@ -49,7 +50,13 @@ function extractExcerpt(content, length = 150) {
 // Main function
 function buildBlogIndex() {
     const postsDir = path.join(__dirname, '..', 'posts');
-    const outputFile = path.join(__dirname, '..', 'blog', 'index.json');
+    const generatedDir = path.join(__dirname, '..', 'generated');
+    const outputFile = path.join(generatedDir, 'blog-posts.json');
+    
+    // Ensure generated directory exists
+    if (!fs.existsSync(generatedDir)) {
+        fs.mkdirSync(generatedDir, { recursive: true });
+    }
     
     // Read all markdown files from posts directory
     const files = fs.readdirSync(postsDir)
@@ -66,11 +73,17 @@ function buildBlogIndex() {
             frontMatter.excerpt = extractExcerpt(markdownContent);
         }
         
+        // Convert markdown to HTML
+        const htmlContent = marked.parse(markdownContent);
+        
         return {
+            id: filename.replace('.md', ''),
             file: filename,
             title: frontMatter.title,
             date: frontMatter.date,
             excerpt: frontMatter.excerpt,
+            content: htmlContent,  // Pre-parsed HTML content
+            markdown: markdownContent,  // Original markdown (optional, can remove if not needed)
             ...frontMatter
         };
     });
@@ -78,10 +91,10 @@ function buildBlogIndex() {
     // Sort by date (newest first)
     posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     
-    // Write the index file
+    // Write the blog posts file
     fs.writeFileSync(outputFile, JSON.stringify(posts, null, 2));
     
-    console.log(`Generated blog index with ${posts.length} posts`);
+    console.log(`Generated ${outputFile} with ${posts.length} posts`);
     console.log('Posts:', posts.map(p => `- ${p.title} (${p.file})`).join('\n'));
 }
 

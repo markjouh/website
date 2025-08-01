@@ -19,6 +19,9 @@ jobs:
       with:
         node-version: '18'
     
+    - name: Install dependencies
+      run: npm install marked
+    
     - name: Generate blog index
       run: node scripts/build-blog.js
     

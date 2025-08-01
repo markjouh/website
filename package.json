@@ -1,0 +1,12 @@
+{
+  "name": "markjouh-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal website with automated blog system",
+  "scripts": {
+    "build-blog": "node scripts/build-blog.js"
+  },
+  "dependencies": {
+    "marked": "^14.0.0"
+  }
+}
