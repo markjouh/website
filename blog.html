@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Xinyun (Mark) Zhou</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .blog-post {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .blog-post:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .blog-post-title {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+        
+        .blog-post-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        
+        .blog-post-excerpt {
+            font-family: var(--font-serif);
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .blog-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .blog-content.active {
+            display: block;
+        }
+        
+        .blog-content h1 {
+            font-family: var(--font-serif);
+            color: var(--text-primary);
+            margin: 30px 0 20px 0;
+            font-size: 24px;
+        }
+        
+        .blog-content h2 {
+            font-family: var(--font-serif);
+            color: var(--text-primary);
+            margin: 30px 0 15px 0;
+            font-size: 20px;
+        }
+        
+        .blog-content h3 {
+            font-family: var(--font-serif);
+            color: var(--text-primary);
+            margin: 25px 0 10px 0;
+            font-size: 16px;
+        }
+        
+        .blog-content p {
+            font-family: var(--font-serif);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .blog-content ul, .blog-content ol {
+            margin: 15px 0;
+            padding-left: 30px;
+            font-family: var(--font-serif);
+            line-height: 1.8;
+        }
+        
+        .blog-content li {
+            margin-bottom: 8px;
+        }
+        
+        .blog-content pre {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .blog-content code {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--accent-green);
+        }
+        
+        .blog-content blockquote {
+            border-left: 3px solid var(--accent-primary);
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .blog-content {
+                padding: 25px;
+            }
+        }
+        
+        .back-button {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.2s;
+        }
+        
+        .back-button:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        .no-posts {
+            text-align: center;
+            color: var(--text-secondary);
+            font-family: var(--font-serif);
+            padding: 40px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="central-column p-lg">
+        <header class="terminal-header border-standard bg-secondary mb-lg">
+            <div class="led-matrix p-sm border-bottom">
+                <canvas id="led-display" width="400" height="20"></canvas>
+            </div>
+            <nav class="file-tabs bg-tertiary border-top">
+                <a href="index.html" class="tab font-mono text-secondary p-sm">HOME</a>
+                <a href="about.html" class="tab font-mono text-secondary p-sm">ABOUT</a>
+                <a href="blog.html" class="tab active font-mono text-secondary p-sm">BLOG</a>
+                <div class="theme-switch-wrapper">
+                    <div class="theme-switch">
+                        <input type="checkbox" id="theme-toggle" />
+                        <label for="theme-toggle" class="theme-switch-label">
+                            <span class="switch-text dark">DARK</span>
+                            <div class="switch-slider">
+                                <div class="switch-handle">
+                                    <div class="handle-indent"></div>
+                                </div>
+                            </div>
+                            <span class="switch-text light">LIGHT</span>
+                        </label>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="content-area">
+            <section class="content-panel active">
+                <div class="latex-header mb-xl">
+                    <h1 class="font-serif mb-sm">Blog</h1>
+                </div>
+                
+                <div id="blog-list">
+                    <!-- Blog posts will be loaded here -->
+                </div>
+                
+                <div id="blog-content" class="blog-content">
+                    <button class="back-button" onclick="showBlogList()">← Back to posts</button>
+                    <div id="blog-content-inner"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="terminal-footer border-top bg-secondary mt-lg">
+            <div class="status-bar p-sm font-mono text-secondary">
+                <span class="status-item">UTF-8</span>
+                <span class="separator">|</span>
+                <span class="status-item" id="time">00:00:00</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Blog post data structure
+        let blogPosts = [];
+        
+        // Function to fetch and parse markdown files
+        async function loadBlogPosts() {
+            try {
+                // For now, we'll manually list the blog posts
+                // In a real implementation, you'd fetch this from a server or GitHub API
+                const response = await fetch('blog/posts.json').catch(() => null);
+                
+                if (response && response.ok) {
+                    blogPosts = await response.json();
+                } else {
+                    // If no posts.json exists, show empty state
+                    blogPosts = [];
+                }
+                
+                displayBlogList();
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+                displayBlogList();
+            }
+        }
+        
+        // Display the list of blog posts
+        function displayBlogList() {
+            const blogList = document.getElementById('blog-list');
+            const blogContent = document.getElementById('blog-content');
+            
+            blogList.style.display = 'block';
+            blogContent.classList.remove('active');
+            
+            if (blogPosts.length === 0) {
+                blogList.innerHTML = `
+                    <div class="no-posts">
+                        <p>No blog posts yet. Add markdown files to the blog directory!</p>
+                        <p style="margin-top: 20px; font-size: 12px;">Create a posts.json file in the blog directory with this format:</p>
+                        <pre style="text-align: left; display: inline-block; margin-top: 10px;">[
+  {
+    "title": "My First Post",
+    "date": "2025-08-01",
+    "file": "first-post.md",
+    "excerpt": "This is my first blog post..."
+  }
+]</pre>
+                    </div>
+                `;
+                return;
+            }
+            
+            blogList.innerHTML = blogPosts.map((post, index) => `
+                <div class="blog-post" onclick="loadBlogPost(${index})">
+                    <h2 class="blog-post-title">${post.title}</h2>
+                    <div class="blog-post-meta">${formatDate(post.date)}</div>
+                    <p class="blog-post-excerpt">${post.excerpt}</p>
+                </div>
+            `).join('');
+        }
+        
+        // Load and display a specific blog post
+        async function loadBlogPost(index) {
+            const post = blogPosts[index];
+            const blogList = document.getElementById('blog-list');
+            const blogContent = document.getElementById('blog-content');
+            const blogContentInner = document.getElementById('blog-content-inner');
+            
+            try {
+                const response = await fetch(`blog/${post.file}`);
+                const markdown = await response.text();
+                const html = marked.parse(markdown);
+                
+                blogContentInner.innerHTML = `
+                    <div class="blog-post-meta" style="margin-bottom: 30px; font-size: 13px; color: var(--text-secondary);">${formatDate(post.date)}</div>
+                    ${html}
+                `;
+                
+                blogList.style.display = 'none';
+                blogContent.classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            } catch (error) {
+                console.error('Error loading blog post:', error);
+                alert('Error loading blog post. Please try again.');
+            }
+        }
+        
+        // Show the blog list
+        function showBlogList() {
+            displayBlogList();
+        }
+        
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+        
+        // Load blog posts on page load
+        loadBlogPosts();
+    </script>
+</body>
+</html>

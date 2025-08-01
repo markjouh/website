@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Xinyun (Mark) Zhou</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="central-column p-lg">
+        <header class="terminal-header border-standard bg-secondary mb-lg">
+            <div class="led-matrix p-sm border-bottom">
+                <canvas id="led-display" width="400" height="20"></canvas>
+            </div>
+            <nav class="file-tabs bg-tertiary border-top">
+                <a href="index.html" class="tab font-mono text-secondary p-sm">HOME</a>
+                <a href="about.html" class="tab active font-mono text-secondary p-sm">ABOUT</a>
+                <a href="blog.html" class="tab font-mono text-secondary p-sm">BLOG</a>
+                <div class="theme-switch-wrapper">
+                    <div class="theme-switch">
+                        <input type="checkbox" id="theme-toggle" />
+                        <label for="theme-toggle" class="theme-switch-label">
+                            <span class="switch-text dark">DARK</span>
+                            <div class="switch-slider">
+                                <div class="switch-handle">
+                                    <div class="handle-indent"></div>
+                                </div>
+                            </div>
+                            <span class="switch-text light">LIGHT</span>
+                        </label>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="content-area">
+            <section class="content-panel active">
+                <div class="latex-header mb-xl">
+                    <h1 class="font-serif mb-sm">About Me</h1>
+                </div>
+                
+                <div class="resume-section bg-secondary border-standard p-lg mb-lg">
+                    <h2 class="section-title font-serif text-primary border-bottom mb-md">Education</h2>
+                    <div class="education-entry font-serif mb-md">
+                        <div class="entry-header">
+                            <span class="institution text-primary">George School</span>
+                            <span class="date text-secondary">Expected May 2025</span>
+                        </div>
+                        <div class="entry-details text-secondary">
+                            <p>High School Senior • Newtown, PA</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-section bg-secondary border-standard p-lg mb-lg">
+                    <h2 class="section-title font-serif text-primary border-bottom mb-md">Technical Achievements</h2>
+                    <div class="achievement-entry font-serif mb-md">
+                        <div class="entry-header">
+                            <span class="achievement-title text-primary">Codeforces Master</span>
+                            <span class="achievement-value text-secondary">Rating: 2219</span>
+                        </div>
+                        <p class="achievement-desc text-secondary">Achieved Master rank (top 1% globally) through consistent performance in competitive programming contests, solving complex algorithmic problems under time constraints.</p>
+                    </div>
+                    <div class="achievement-entry font-serif mb-md">
+                        <div class="entry-header">
+                            <span class="achievement-title text-primary">USACO Platinum Division</span>
+                            <span class="achievement-value text-secondary">Highest Division</span>
+                        </div>
+                        <p class="achievement-desc text-secondary">Qualified for the most advanced division of the USA Computing Olympiad (top 200 US high school students), demonstrating expertise in algorithms and data structures.</p>
+                    </div>
+                </div>
+
+                <div class="resume-section bg-secondary border-standard p-lg mb-lg">
+                    <h2 class="section-title font-serif text-primary border-bottom mb-md">Skills & Interests</h2>
+                    <div class="skills-grid border-standard">
+                        <div class="skill-category bg-secondary p-md font-serif">
+                            <h3 class="text-primary mb-sm">Languages & Tools</h3>
+                            <p class="text-secondary">C++, Python, Prompt Engineering, Agentic Coding Tools</p>
+                        </div>
+                        <div class="skill-category bg-secondary p-md font-serif">
+                            <h3 class="text-primary mb-sm">Domains</h3>
+                            <p class="text-secondary">Machine Learning, Algorithm Design, Systems Programming</p>
+                        </div>
+                        <div class="skill-category bg-secondary p-md font-serif">
+                            <h3 class="text-primary mb-sm">Interests</h3>
+                            <p class="text-secondary">Roguelike Games, Drawing, Anime</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="terminal-footer border-top bg-secondary mt-lg">
+            <div class="status-bar p-sm font-mono text-secondary">
+                <span class="status-item">UTF-8</span>
+                <span class="separator">|</span>
+                <span class="status-item" id="time">00:00:00</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

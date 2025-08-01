@@ -6,19 +6,126 @@
     <title>Xinyun (Mark) Zhou</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .home-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .home-panel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        
+        .panel-header {
+            background: var(--bg-tertiary);
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-color);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .panel-content {
+            padding: 20px;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8px 16px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+        
+        .status-label {
+            color: var(--text-secondary);
+        }
+        
+        .status-value {
+            color: var(--text-primary);
+        }
+        
+        .quick-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .quick-link {
+            padding: 12px 16px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .quick-link:last-child {
+            border-bottom: none;
+        }
+        
+        .quick-link:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .link-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .link-icon {
+            width: 16px;
+            height: 16px;
+            fill: var(--text-secondary);
+            transition: fill 0.2s;
+        }
+        
+        .quick-link:hover .link-icon {
+            fill: var(--text-primary);
+        }
+        
+        .link-arrow {
+            color: var(--text-secondary);
+        }
+        
+        .intro-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            font-family: var(--font-serif);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            .home-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Central container with focused content -->
     <div class="central-column p-lg">
-        <!-- Terminal header with LED matrix -->
         <header class="terminal-header border-standard bg-secondary mb-lg">
             <div class="led-matrix p-sm border-bottom">
                 <canvas id="led-display" width="400" height="20"></canvas>
             </div>
             <nav class="file-tabs bg-tertiary border-top">
-                <button class="tab active font-mono text-secondary p-sm" data-section="about">README</button>
-                <button class="tab font-mono text-secondary p-sm" data-section="work">projects</button>
-                <button class="tab font-mono text-secondary p-sm" data-section="contact">contact</button>
+                <a href="index.html" class="tab active font-mono text-secondary p-sm">HOME</a>
+                <a href="about.html" class="tab font-mono text-secondary p-sm">ABOUT</a>
+                <a href="blog.html" class="tab font-mono text-secondary p-sm">BLOG</a>
                 <div class="theme-switch-wrapper">
                     <div class="theme-switch">
                         <input type="checkbox" id="theme-toggle" />
@@ -36,120 +143,88 @@
             </nav>
         </header>
 
-        <!-- Main content area with dense information layout -->
         <main class="content-area">
-            <!-- About section with LaTeX-style formatting -->
-            <section id="about" class="content-panel active">
+            <section class="content-panel active">
                 <div class="latex-header mb-xl">
                     <div class="profile-icon mb-lg">
                         <img src="mark.png" alt="Profile" />
                     </div>
                     <h1 class="font-serif mb-sm">Xinyun (Mark) Zhou</h1>
-                    <div class="author-block font-serif">
-                        <div class="contact-line font-serif text-secondary mt-sm">xinyunzhouu@gmail.com • github.com/markjouh • Newtown, PA</div>
-                    </div>
                 </div>
                 
-                <div class="resume-section bg-secondary border-standard p-lg mb-lg">
-                    <h2 class="section-title font-serif text-primary border-bottom mb-md">Education</h2>
-                    <div class="education-entry font-serif mb-md">
-                        <div class="entry-header">
-                            <span class="institution text-primary">George School</span>
-                            <span class="date text-secondary">Expected May 2025</span>
-                        </div>
-                        <div class="entry-details text-secondary">
-                            <p>High School Senior • Newtown, PA</p>
-                        </div>
-                    </div>
+                <div class="intro-box">
+                    <p>High school senior passionate about computer science, competitive programming, and machine learning. I enjoy solving complex algorithmic problems and building cool things with code.</p>
                 </div>
-
-                <div class="resume-section bg-secondary border-standard p-lg mb-lg">
-                    <h2 class="section-title font-serif text-primary border-bottom mb-md">Technical Achievements</h2>
-                    <div class="achievement-entry font-serif mb-md">
-                        <div class="entry-header">
-                            <span class="achievement-title text-primary">Codeforces Master</span>
-                            <span class="achievement-value text-secondary">Rating: 2219</span>
-                        </div>
-                        <p class="achievement-desc text-secondary">Achieved Master rank (top 1% globally) through consistent performance in competitive programming contests, solving complex algorithmic problems under time constraints.</p>
-                    </div>
-                    <div class="achievement-entry font-serif mb-md">
-                        <div class="entry-header">
-                            <span class="achievement-title text-primary">USACO Platinum Division</span>
-                            <span class="achievement-value text-secondary">Highest Division</span>
-                        </div>
-                        <p class="achievement-desc text-secondary">Qualified for the most advanced division of the USA Computing Olympiad (top 200 US high school students), demonstrating expertise in algorithms and data structures.</p>
-                    </div>
-                </div>
-
-                <div class="resume-section bg-secondary border-standard p-lg mb-lg">
-                    <h2 class="section-title font-serif text-primary border-bottom mb-md">Skills & Interests</h2>
-                    <div class="skills-grid border-standard">
-                        <div class="skill-category bg-secondary p-md font-serif">
-                            <h3 class="text-primary mb-sm">Languages & Tools</h3>
-                            <p class="text-secondary">C++, Python, Prompt Engineering, Agentic Coding Tools</p>
-                        </div>
-                        <div class="skill-category bg-secondary p-md font-serif">
-                            <h3 class="text-primary mb-sm">Domains</h3>
-                            <p class="text-secondary">Machine Learning, Algorithm Design, Systems Programming</p>
-                        </div>
-                        <div class="skill-category bg-secondary p-md font-serif">
-                            <h3 class="text-primary mb-sm">Interests</h3>
-                            <p class="text-secondary">Roguelike Games, Drawing, Anime</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="summary-box bg-secondary border-standard p-lg mt-lg font-serif text-primary">
-                    <p>High school senior passionate about computer science, with a strong background in competitive programming and growing interest in machine learning. Seeking opportunities to apply algorithmic thinking to real-world problems.</p>
-                </div>
-            </section>
-
-            <!-- Work section with file tree and Bloomberg-style data -->
-            <section id="work" class="content-panel">
-                <div class="split-view">
-                    <div class="file-browser border-standard bg-secondary">
-                        <div class="path-bar bg-tertiary p-sm border-bottom font-mono text-secondary">/home/projects/</div>
-                        <div class="file-tree p-md">
-                            <div class="tree-entry file">
-                                <span class="icon">●</span> Loading repositories...
+                
+                <div class="home-grid">
+                    <div class="home-panel">
+                        <div class="panel-header">STATUS</div>
+                        <div class="panel-content">
+                            <div class="status-grid">
+                                <span class="status-label">LOCATION:</span>
+                                <span class="status-value">Newtown, PA</span>
+                                
+                                <span class="status-label">SCHOOL:</span>
+                                <span class="status-value">George School</span>
+                                
+                                <span class="status-label">YEAR:</span>
+                                <span class="status-value">Senior (2025)</span>
+                                
+                                <span class="status-label">FOCUS:</span>
+                                <span class="status-value">Algorithms & ML</span>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="metrics-panel border-standard bg-secondary p-md">
-                        <h3 class="font-mono text-primary mb-md">PROJECT_INFO</h3>
-                        <table class="data-table">
-                            <tr>
-                                <td class="ticker">LOADING</td>
-                                <td class="value">...</td>
-                                <td class="trend">—</td>
-                            </tr>
-                        </table>
+                    <div class="home-panel">
+                        <div class="panel-header">CONTACT</div>
+                        <div class="panel-content">
+                            <div class="status-grid">
+                                <span class="status-label">EMAIL:</span>
+                                <span class="status-value">xinyunzhouu@gmail.com</span>
+                                
+                                <span class="status-label">DISCORD:</span>
+                                <span class="status-value">markjouh</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-            </section>
-
-
-            <!-- Contact section with terminal -->
-            <section id="contact" class="content-panel">
-                <div class="terminal-window border-standard">
-                    <div class="terminal-window-header bg-tertiary p-sm border-bottom">
-                        <span class="terminal-title font-mono text-secondary">bash — 80×24</span>
-                    </div>
-                    <div class="terminal-body bg-primary p-md">
-                        <pre class="terminal-content font-mono text-primary"><span class="prompt">$</span> cat contact.txt
-<span class="output">EMAIL:    xinyunzhouu@gmail.com
-GITHUB:   github.com/markjouh
-DISCORD:  markjouh</span>
-
-<span class="prompt">$</span> <span class="cursor">█</span></pre>
+                
+                <div class="home-panel mt-lg">
+                    <div class="panel-header">PROFILES</div>
+                    <div class="quick-links">
+                        <a href="https://github.com/markjouh" class="quick-link" target="_blank">
+                            <span class="link-label">
+                                <svg class="link-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                                </svg>
+                                <span>GitHub</span>
+                            </span>
+                            <span class="link-arrow">↗</span>
+                        </a>
+                        <a href="https://codeforces.com/profile/mark" class="quick-link" target="_blank">
+                            <span class="link-label">
+                                <svg class="link-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.5 7.5A1.5 1.5 0 0 1 6 9v10.5A1.5 1.5 0 0 1 4.5 21h-3C.673 21 0 20.328 0 19.5V9c0-.828.673-1.5 1.5-1.5h3zm9-4.5A1.5 1.5 0 0 1 15 4.5v15a1.5 1.5 0 0 1-1.5 1.5h-3c-.827 0-1.5-.672-1.5-1.5v-15c0-.828.673-1.5 1.5-1.5h3zm9 7.5A1.5 1.5 0 0 1 24 12v7.5a1.5 1.5 0 0 1-1.5 1.5h-3a1.5 1.5 0 0 1-1.5-1.5V12a1.5 1.5 0 0 1 1.5-1.5h3z"/>
+                                </svg>
+                                <span>Codeforces</span>
+                            </span>
+                            <span class="link-arrow">↗</span>
+                        </a>
+                        <a href="https://youtube.com/@markjouh" class="quick-link" target="_blank">
+                            <span class="link-label">
+                                <svg class="link-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                                <span>YouTube</span>
+                            </span>
+                            <span class="link-arrow">↗</span>
+                        </a>
                     </div>
                 </div>
             </section>
         </main>
 
-        <!-- Footer -->
         <footer class="terminal-footer border-top bg-secondary mt-lg">
             <div class="status-bar p-sm font-mono text-secondary">
                 <span class="status-item">UTF-8</span>
