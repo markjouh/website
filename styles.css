@@ -28,4 +28,8 @@ img {
     a {
         color: #4493f8;
     }
+    
+    img {
+        filter: invert(1);
+    }
 }
