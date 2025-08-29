@@ -1,0 +1,31 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    font-size: 16px;
+    padding: 0 10px;
+    margin: 50px auto;
+    max-width: 650px;
+}
+
+#maincontent {
+    max-width: 42em;
+    margin: 15px auto;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+    
+    a {
+        color: #4493f8;
+    }
+}
