@@ -27,7 +27,7 @@ img {
 }
 
 .footer-img {
-    width: 150px;
+    max-width: 150px;
     margin-top: 40px;
 }
 
