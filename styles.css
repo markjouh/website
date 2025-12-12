@@ -7,6 +7,10 @@ body {
     max-width: 650px;
 }
 
+h1 {
+    font-size: 1.5em;
+}
+
 #maincontent {
     margin: 15px auto;
 }
@@ -16,6 +20,11 @@ img {
     height: auto;
     display: block;
     margin: 20px auto;
+}
+
+.footer-img {
+    width: 150px;
+    margin-top: 40px;
 }
 
 @media (prefers-color-scheme: dark) {
