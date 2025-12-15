@@ -17,6 +17,7 @@
         <h1>Mark Zhou</h1>
         
         <p>Hi, I'm a high school senior passionate about computer science, with a background in competitive programming.</p>
+        <p>Have questions? Try asking the <a href="#" id="chat-toggle" class="chat-link">[[resident chatbot]]</a>.</p>
         
         <h2>Find me online</h2>
         <ul>
@@ -49,8 +50,20 @@
         <ul>
             <li><em><a href="pages/microplastics.html">The Unexpected Health Benefits of Consuming Microplastics</a></em></li>
         </ul>
-        
+
         <img src="footer.png" alt="Cats" class="footer-img">
+
+        <div id="chat-box">
+            <div id="chat-header"><button id="chat-close">×</button><span id="chat-title">chatbot v1</span></div>
+            <div id="chat-messages"></div>
+            <form id="chat-form">
+                <input type="text" id="chat-input" placeholder="Ask about Mark" autocomplete="off" maxlength="500">
+                <span id="char-count">0/500</span>
+                <button type="submit" aria-label="Send"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3L8 13M8 3L4 7M8 3L12 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </form>
+        </div>
     </main>
+
+    <script type="module" src="chat.js"></script>
 </body>
 </html>
