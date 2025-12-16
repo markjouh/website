@@ -28,6 +28,14 @@ h2 {
     font-size: 1.17em;
 }
 
+a {
+    color: #2563eb;
+}
+
+a:visited {
+    color: #1e4a7f;
+}
+
 #maincontent {
     margin: 15px auto;
 }
