@@ -8,19 +8,20 @@
     const bulbSpacing = 40;
     const droop = 6;
 
-    function shuffle(arr) {
-        const a = arr.slice();
-        for (let i = a.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [a[i], a[j]] = [a[j], a[i]];
-        }
-        return a;
-    }
-
     // Seeded random for consistent results per strand
     function seededRandom(seed) {
         const x = Math.sin(seed) * 10000;
         return x - Math.floor(x);
+    }
+
+    // Seeded shuffle for consistent color order
+    function seededShuffle(arr, seed) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(seededRandom(seed + i * 17) * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
     }
 
     function createStrand(yBase, xOffset, seed) {
@@ -96,11 +97,13 @@
         path.setAttribute('class', 'wire-path');
         svg.appendChild(path);
 
-        // Create bulbs with shuffled colors
+        // Create bulbs with seeded shuffled colors
         let colorPool = [];
-        bulbPositions.forEach((pos) => {
+        let colorPoolSeed = seed + 1000;
+        bulbPositions.forEach((pos, idx) => {
             if (colorPool.length === 0) {
-                colorPool = shuffle(colors.slice());
+                colorPool = seededShuffle(colors.slice(), colorPoolSeed);
+                colorPoolSeed += 100;
             }
 
             const bulb = document.createElement('div');
@@ -108,11 +111,12 @@
             bulb.style.left = (pos.x - 4) + 'px';
             bulb.style.top = (pos.y) + 'px';
 
-            // Vary animation more dramatically - apply to ::after pseudo-element
+            // Use seeded random for animation properties
             const animations = ['glow', 'glow2', 'glow3'];
-            const animName = animations[Math.floor(Math.random() * 3)];
-            const animDelay = (Math.random() * 4) + 's';
-            const animDuration = (1.5 + Math.random() * 2.5) + 's';
+            const animSeed = seed + idx * 13;
+            const animName = animations[Math.floor(seededRandom(animSeed) * 3)];
+            const animDelay = (seededRandom(animSeed + 1) * 4) + 's';
+            const animDuration = (1.5 + seededRandom(animSeed + 2) * 2.5) + 's';
             bulb.style.setProperty('--anim-name', animName);
             bulb.style.setProperty('--anim-delay', animDelay);
             bulb.style.setProperty('--anim-duration', animDuration);
@@ -120,7 +124,21 @@
         });
     }
 
-    // Two rows of lights - second row first (behind), then first row (front)
-    createStrand(12, 20, 42);  // back row
-    createStrand(6, 0, 137);   // front row
+    function renderLights() {
+        // Clear existing content
+        container.innerHTML = '';
+        // Two rows of lights - second row first (behind), then first row (front)
+        createStrand(12, 20, 42);  // back row
+        createStrand(6, 0, 137);   // front row
+    }
+
+    // Initial render
+    renderLights();
+
+    // Handle window resize with debounce
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(renderLights, 150);
+    });
 })();
