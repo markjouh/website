@@ -118,7 +118,7 @@ img {
     height: 60px;
     pointer-events: none;
     z-index: 1000;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .wire-svg {
