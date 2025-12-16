@@ -24,7 +24,7 @@
     }
 
     function createStrand(yBase, xOffset, seed) {
-        const numBulbs = Math.ceil(window.innerWidth / bulbSpacing) + 2;
+        const numBulbs = Math.ceil(window.innerWidth / bulbSpacing) + 1;
         const bulbPositions = [];
 
         // Create SVG for wire
