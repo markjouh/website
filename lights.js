@@ -5,17 +5,9 @@
     document.body.appendChild(container);
 
     const colors = ['red', 'green', 'blue', 'yellow'];
+    const animations = ['glow', 'glow2', 'glow3'];
     const bulbSpacing = 40;
     const droop = 6;
-
-    function shuffle(arr) {
-        const a = arr.slice();
-        for (let i = a.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [a[i], a[j]] = [a[j], a[i]];
-        }
-        return a;
-    }
 
     // Seeded random for consistent results per strand
     function seededRandom(seed) {
@@ -23,104 +15,107 @@
         return x - Math.floor(x);
     }
 
-    function createStrand(yBase, xOffset, seed) {
+    // Seeded shuffle for consistent color order
+    function seededShuffle(arr, seed) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(seededRandom(seed + i * 17) * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    function createStrand(yBase, xOffset, seed, fragment) {
         const numBulbs = Math.ceil(window.innerWidth / bulbSpacing) + 1;
-        const bulbPositions = [];
 
         // Create SVG for wire
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.setAttribute('class', 'wire-svg');
         svg.setAttribute('width', '100%');
         svg.setAttribute('height', '60');
-        svg.style.position = 'absolute';
-        svg.style.top = '0';
-        svg.style.left = '0';
-        container.appendChild(svg);
+        svg.style.cssText = 'position:absolute;top:0;left:0';
+        fragment.appendChild(svg);
 
         // Create "nail" positions - where the strand is pinned up
-        const nailSpacing = Math.floor(numBulbs / 4); // roughly 4-5 nails across
-        const nails = new Set();
+        const nailSpacing = Math.floor(numBulbs / 4);
+        const nails = new Set([0, numBulbs]);
         for (let i = 0; i < numBulbs; i += nailSpacing) {
             const nailPos = i + Math.floor(seededRandom(seed + i * 7) * 3) - 1;
             if (nailPos >= 0 && nailPos <= numBulbs) nails.add(nailPos);
         }
-        nails.add(0);
-        nails.add(numBulbs);
+        const sortedNails = Array.from(nails).sort((a, b) => a - b);
 
-        // Generate random variations for each anchor point
-        const anchors = [];
+        // Generate anchors and build path simultaneously
+        const pathParts = [];
+        const bulbPositions = [];
+        let prevAnchor = null;
+        let nailIdx = 0;
+
         for (let i = 0; i <= numBulbs; i++) {
-            const xVariation = (seededRandom(seed + i * 3) - 0.5) * 8;
-            const yVariation = (seededRandom(seed + i * 3 + 1) - 0.5) * 3;
-            const droopVariation = (seededRandom(seed + i * 3 + 2) - 0.5) * 4;
+            // Advance nail index
+            while (nailIdx < sortedNails.length - 1 && sortedNails[nailIdx + 1] < i) nailIdx++;
+            const prevNail = sortedNails[nailIdx];
+            const nextNail = sortedNails[nailIdx + 1] || numBulbs;
 
-            // Find distance to nearest nail for gentle arc
-            let minDistToNail = numBulbs;
-            let prevNail = 0, nextNail = numBulbs;
-            for (const nail of nails) {
-                if (nail <= i && nail > prevNail) prevNail = nail;
-                if (nail >= i && nail < nextNail) nextNail = nail;
-            }
             const segmentLength = nextNail - prevNail;
             const posInSegment = i - prevNail;
-            // Parabolic sag between nails
-            const sagAmount = segmentLength > 0 ?
-                8 * Math.sin(Math.PI * posInSegment / segmentLength) : 0;
+            const sagAmount = segmentLength > 0 ? 8 * Math.sin(Math.PI * posInSegment / segmentLength) : 0;
 
-            anchors.push({
-                x: i * bulbSpacing + xOffset + xVariation,
-                y: yBase + yVariation + sagAmount,
-                droop: droop + droopVariation
-            });
-        }
+            const anchor = {
+                x: i * bulbSpacing + xOffset + (seededRandom(seed + i * 3) - 0.5) * 8,
+                y: yBase + (seededRandom(seed + i * 3 + 1) - 0.5) * 3 + sagAmount,
+                droop: droop + (seededRandom(seed + i * 3 + 2) - 0.5) * 4
+            };
 
-        // Build path with curves between bulbs
-        let pathD = `M ${anchors[0].x - 20} ${anchors[0].y}`;
-
-        for (let i = 0; i < numBulbs; i++) {
-            const curr = anchors[i];
-            const next = anchors[i + 1];
-            const midX = (curr.x + next.x) / 2;
-            const midY = Math.max(curr.y, next.y) + curr.droop;
-
-            pathD += ` Q ${midX} ${midY}, ${next.x} ${next.y}`;
-
-            bulbPositions.push({
-                x: midX,
-                y: midY
-            });
+            if (i === 0) {
+                pathParts.push('M', anchor.x - 20, anchor.y);
+            } else {
+                const midX = (prevAnchor.x + anchor.x) / 2;
+                const midY = Math.max(prevAnchor.y, anchor.y) + prevAnchor.droop;
+                pathParts.push('Q', midX, midY + ',', anchor.x, anchor.y);
+                bulbPositions.push({ x: midX, y: midY });
+            }
+            prevAnchor = anchor;
         }
 
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.setAttribute('d', pathD);
+        path.setAttribute('d', pathParts.join(' '));
         path.setAttribute('class', 'wire-path');
         svg.appendChild(path);
 
-        // Create bulbs with shuffled colors
+        // Create bulbs with seeded shuffled colors
         let colorPool = [];
-        bulbPositions.forEach((pos) => {
+        let colorPoolSeed = seed + 1000;
+        for (let idx = 0; idx < bulbPositions.length; idx++) {
             if (colorPool.length === 0) {
-                colorPool = shuffle(colors.slice());
+                colorPool = seededShuffle(colors, colorPoolSeed);
+                colorPoolSeed += 100;
             }
-
+            const pos = bulbPositions[idx];
             const bulb = document.createElement('div');
             bulb.className = 'bulb ' + colorPool.pop();
-            bulb.style.left = (pos.x - 4) + 'px';
-            bulb.style.top = (pos.y) + 'px';
-
-            // Vary animation more dramatically - apply to ::after pseudo-element
-            const animations = ['glow', 'glow2', 'glow3'];
-            const animName = animations[Math.floor(Math.random() * 3)];
-            const animDelay = (Math.random() * 4) + 's';
-            const animDuration = (1.5 + Math.random() * 2.5) + 's';
-            bulb.style.setProperty('--anim-name', animName);
-            bulb.style.setProperty('--anim-delay', animDelay);
-            bulb.style.setProperty('--anim-duration', animDuration);
-            container.appendChild(bulb);
-        });
+            const animSeed = seed + idx * 13;
+            bulb.style.cssText = 'left:' + (pos.x - 4) + 'px;top:' + pos.y + 'px;' +
+                '--anim-name:' + animations[Math.floor(seededRandom(animSeed) * 3)] +
+                ';--anim-delay:' + (seededRandom(animSeed + 1) * 4) + 's' +
+                ';--anim-duration:' + (1.5 + seededRandom(animSeed + 2) * 2.5) + 's';
+            fragment.appendChild(bulb);
+        }
     }
 
-    // Two rows of lights - second row first (behind), then first row (front)
-    createStrand(12, 20, 42);  // back row
-    createStrand(6, 0, 137);   // front row
+    function renderLights() {
+        container.innerHTML = '';
+        const fragment = document.createDocumentFragment();
+        createStrand(12, 20, 42, fragment);
+        createStrand(6, 0, 137, fragment);
+        container.appendChild(fragment);
+    }
+
+    renderLights();
+
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(renderLights, 150);
+    });
 })();
