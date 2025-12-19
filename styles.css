@@ -105,86 +105,6 @@ img {
     background-color: #f0f0f0;
 }
 
-/* ============================================
-   CHRISTMAS LIGHTS - Remove after holidays
-   Delete this section and lights.js
-   ============================================ */
-
-.christmas-lights {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    pointer-events: none;
-    z-index: 1000;
-    overflow: hidden;
-}
-
-.wire-svg {
-    overflow: visible;
-}
-
-.wire-path {
-    fill: none;
-    stroke: #d1d5db;
-    stroke-width: 1;
-}
-
-.bulb {
-    position: absolute;
-    width: 8px;
-    height: 12px;
-}
-
-.bulb::before {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
-    background: #6b7280;
-    border-radius: 1px;
-}
-
-.bulb::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-    animation: var(--anim-name, glow) var(--anim-duration, 1.5s) ease-in-out infinite;
-    animation-delay: var(--anim-delay, 0s);
-}
-
-.bulb.red::after { background: #ef4444; box-shadow: 0 0 10px 3px rgba(239, 68, 68, 0.6); }
-.bulb.green::after { background: #22c55e; box-shadow: 0 0 10px 3px rgba(34, 197, 94, 0.6); }
-.bulb.blue::after { background: #3b82f6; box-shadow: 0 0 10px 3px rgba(59, 130, 246, 0.6); }
-.bulb.yellow::after { background: #eab308; box-shadow: 0 0 10px 3px rgba(234, 179, 8, 0.6); }
-
-@keyframes glow {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-}
-
-@keyframes glow2 {
-    0%, 100% { opacity: 0.7; }
-    30% { opacity: 1; }
-    60% { opacity: 0.6; }
-}
-
-@keyframes glow3 {
-    0%, 100% { opacity: 0.6; }
-    25% { opacity: 0.9; }
-    75% { opacity: 1; }
-}
-
-/* END CHRISTMAS LIGHTS */
-
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #000;
@@ -224,13 +144,4 @@ img {
         background-color: #1a1a1a;
     }
 
-    /* CHRISTMAS LIGHTS dark mode overrides */
-    .wire-path {
-        stroke: #1f2937;
-    }
-
-    .bulb::before {
-        background: #374151;
-    }
-    /* END CHRISTMAS LIGHTS dark mode */
 }

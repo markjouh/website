@@ -47,7 +47,9 @@
 
         // Generate anchors and build path simultaneously
         const pathParts = [];
-        const bulbPositions = [];
+        let colorPool = [];
+        let colorPoolSeed = seed + 1000;
+        let bulbIdx = 0;
         let prevAnchor = null;
         let nailIdx = 0;
 
@@ -73,7 +75,20 @@
                 const midX = (prevAnchor.x + anchor.x) / 2;
                 const midY = Math.max(prevAnchor.y, anchor.y) + prevAnchor.droop;
                 pathParts.push('Q', midX, midY + ',', anchor.x, anchor.y);
-                bulbPositions.push({ x: midX, y: midY });
+
+                if (colorPool.length === 0) {
+                    colorPool = seededShuffle(colors, colorPoolSeed);
+                    colorPoolSeed += 100;
+                }
+                const bulb = document.createElement('div');
+                bulb.className = 'bulb ' + colorPool.pop();
+                const animSeed = seed + bulbIdx * 13;
+                bulb.style.cssText = 'left:' + (midX - 4) + 'px;top:' + midY + 'px;' +
+                    '--anim-name:' + animations[Math.floor(seededRandom(animSeed) * 3)] +
+                    ';--anim-delay:' + (seededRandom(animSeed + 1) * 4) + 's' +
+                    ';--anim-duration:' + (1.5 + seededRandom(animSeed + 2) * 2.5) + 's';
+                fragment.appendChild(bulb);
+                bulbIdx += 1;
             }
             prevAnchor = anchor;
         }
@@ -83,24 +98,7 @@
         path.setAttribute('class', 'wire-path');
         svg.appendChild(path);
 
-        // Create bulbs with seeded shuffled colors
-        let colorPool = [];
-        let colorPoolSeed = seed + 1000;
-        for (let idx = 0; idx < bulbPositions.length; idx++) {
-            if (colorPool.length === 0) {
-                colorPool = seededShuffle(colors, colorPoolSeed);
-                colorPoolSeed += 100;
-            }
-            const pos = bulbPositions[idx];
-            const bulb = document.createElement('div');
-            bulb.className = 'bulb ' + colorPool.pop();
-            const animSeed = seed + idx * 13;
-            bulb.style.cssText = 'left:' + (pos.x - 4) + 'px;top:' + pos.y + 'px;' +
-                '--anim-name:' + animations[Math.floor(seededRandom(animSeed) * 3)] +
-                ';--anim-delay:' + (seededRandom(animSeed + 1) * 4) + 's' +
-                ';--anim-duration:' + (1.5 + seededRandom(animSeed + 2) * 2.5) + 's';
-            fragment.appendChild(bulb);
-        }
+        // Bulbs are appended during path generation.
     }
 
     function renderLights() {
