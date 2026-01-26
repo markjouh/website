@@ -1,9 +1,9 @@
 a {
-    color: #60a5fa;
+    color: #5a9a8a;
 }
 
 a:visited {
-    color: #a78bfa;
+    color: #5a9a8a;
 }
 
 body {
@@ -31,6 +31,33 @@ h2 {
 
 #maincontent {
     margin: 15px auto;
+}
+
+.social-links {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    gap: 0.4em 3em;
+    width: fit-content;
+    list-style: none;
+    padding: 0;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    text-decoration: none;
+}
+
+.social-links a i {
+    width: 1.2em;
+    text-align: center;
+}
+
+.social-links li:nth-child(n+4) a {
+    color: #b08090;
 }
 
 .back-button {
