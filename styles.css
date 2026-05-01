@@ -33,6 +33,10 @@ h2 {
     margin: 15px auto;
 }
 
+.muted {
+    color: #999;
+}
+
 .social-links {
     display: flex;
     gap: 3em;
