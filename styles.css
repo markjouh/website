@@ -1,96 +1,171 @@
-a {
-    color: #5a9a8a;
+:root {
+    --bg: #0d1117;
+    --bg-raised: #161b22;
+    --border: #30363d;
+    --border-bright: #484f58;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #f4553a;
 }
 
-a:visited {
-    color: #5a9a8a;
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--bg);
 }
 
 body {
     font-family: "IBM Plex Sans", sans-serif;
-    line-height: 1.4;
+    line-height: 1.6;
     font-size: 16px;
-    padding: 0 10px;
-    margin: 50px auto;
-    max-width: 650px;
-    background-color: #1a1a1a;
-    color: #fff;
+    padding: 0 20px;
+    margin: 0 auto;
+    max-width: 640px;
+    background-color: var(--bg);
+    color: var(--text);
 }
 
-h1, h2 {
-    font-family: "IBM Plex Sans", sans-serif;
-}
-
-h1 {
-    font-size: 1.5em;
-}
-
-h2 {
-    font-size: 1.17em;
+::selection {
+    background: var(--accent);
+    color: var(--bg);
 }
 
 #maincontent {
-    margin: 15px auto;
+    padding: 64px 0;
 }
 
-.muted {
-    color: #999;
+h1 {
+    font-size: 1.75em;
+    letter-spacing: -0.02em;
+    margin: 0 0 2px;
+    color: #fff;
 }
 
-.social-links {
+.tagline {
+    font-size: 0.95em;
+    color: var(--text-dim);
+    margin: 0 0 16px;
+}
+
+.links {
     display: flex;
-    gap: 3em;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    margin: 0 0 28px;
+    font-size: 0.9em;
 }
 
-.social-col {
+.links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.links a:hover {
+    color: var(--accent);
+}
+
+.links i,
+.links .emoji-icon {
+    font-style: normal;
+    font-size: 0.95em;
+}
+
+.links .emoji-icon {
+    filter: grayscale(1) opacity(0.75);
+}
+
+h2 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-dim);
+    margin: 36px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+p {
+    margin: 0 0 1em;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: rgba(244, 85, 58, 0.4);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s ease;
+}
+
+a:hover {
+    text-decoration-color: var(--accent);
+}
+
+.item-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25em;
 }
 
-.social-col a {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    text-decoration: none;
+.item-list li {
+    margin-bottom: 14px;
 }
 
-.social-col a i {
-    width: 1.2em;
-    text-align: center;
+.item-list .item-title {
+    font-weight: 700;
 }
 
-.social-col-right a {
-    color: #b08090;
+.item-list .item-note {
+    color: var(--text-dim);
+    font-size: 0.9em;
+}
+
+.item-list .item-desc {
+    display: block;
+    color: var(--text);
+}
+
+.awards {
+    list-style: disc;
+    padding-left: 1.2em;
+    margin: 0;
+}
+
+.awards li {
+    margin-bottom: 4px;
+}
+
+.muted {
+    color: var(--text-dim);
 }
 
 .back-button {
     display: inline-flex;
     align-items: center;
     gap: 0.5em;
-    padding: 0.5em 1em;
+    padding: 0.6em 1.1em;
     margin-top: 2em;
-    border: 1px solid #444;
-    border-radius: 4px;
-    text-decoration: none;
-    font-family: "IBM Plex Sans", sans-serif;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--bg-raised);
     font-size: 0.9em;
-    color: inherit;
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.15s ease;
 }
 
 .back-button::before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5M12 19l-7-7 7-7'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
+    content: "\2190";
+    color: var(--accent);
 }
 
 .back-button:hover {
-    background-color: #252525;
+    border-color: var(--border-bright);
 }
