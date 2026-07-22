@@ -1,5 +1,5 @@
 %-------------------------
-% Resume — Xinyun (Mark) Zhou
+% Resume — Mark Zhou
 % Based on Jake Gutierrez's template: https://github.com/jakegut/resume (MIT License)
 %------------------------------------------
 
@@ -16,11 +16,15 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
-\input{glyphtounicode}
+\usepackage{iftex}
+\ifPDFTeX
+  \input{glyphtounicode}
+\fi
 
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfoot{}
+\setlength{\footskip}{5pt}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -43,7 +47,9 @@
 }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
 % Ensure that generated pdf is machine readable/ATS parsable
-\pdfgentounicode=1
+\ifPDFTeX
+  \pdfgentounicode=1
+\fi
 
 %-------------------------
 % Custom commands
@@ -91,10 +97,10 @@
 
 %----------HEADING----------
 \begin{center}
-    \textbf{\Huge \scshape Xinyun (Mark) Zhou} \\ \vspace{1pt}
-    \small Newtown, PA $|$ \href{mailto:markjouh@icloud.com}{\underline{markjouh@icloud.com}} $|$
+    \textbf{\Huge Mark Zhou} \\ \vspace{1pt}
+    \small Madison, WI $|$ \href{mailto:markjouh@icloud.com}{\underline{markjouh@icloud.com}} $|$
     \href{https://markjouh.com}{\underline{markjouh.com}} $|$
-    \href{https://linkedin.com/in/xinyun-zhou-3b431b289}{\underline{linkedin.com/in/xinyun-zhou-3b431b289}} $|$
+    \href{https://www.linkedin.com/in/xinyun-mark-zhou/}{\underline{linkedin.com/in/xinyun-mark-zhou}} $|$
     \href{https://github.com/markjouh}{\underline{github.com/markjouh}}
 \end{center}
 
@@ -103,35 +109,23 @@
   \resumeSubHeadingListStart
     \resumeSubheading
       {University of Wisconsin--Madison}{Madison, WI}
-      {BS in Computer Science, College of Letters \& Science}{Sep. 2026 -- May 2030}
+      {B.S. Computer Sciences, College of Letters \& Science}{Sep. 2026 -- May 2030 (expected)}
     \resumeSubheading
       {George School}{Newtown, PA}
       {High School Diploma, College/University Preparatory Program}{Sep. 2021 -- May 2026}
-      \resumeItemListStart
-        \resumeItem{Took gap year 2024-2025 to focus full-time on competitive programming, machine learning, robotics, and heuristic optimization, winning multiple university contests}
-        \resumeItem{\textbf{Relevant Coursework:} Advanced Programming: Artificial Intelligence, Statistics with Data Science, Proof \& Advanced Topics in Mathematics, Advanced Math: Linear Algebra, AP Calculus BC, Advanced Physical Computing \& Robotics}
-      \resumeItemListEnd
   \resumeSubHeadingListEnd
-
-%-----------TECHNICAL SKILLS-----------
-\section{Technical Skills}
- \begin{itemize}[leftmargin=0.15in, label={}]
-    \small{\item{
-     \textbf{Languages}{: C, C++, Java, Python, Swift/SwiftUI, HTML/CSS/JavaScript} \\
-     \textbf{Frameworks \& Tools}{: PyTorch, Git, Xcode, iOS Development, CAD, Teensy/Embedded Systems}
-    }}
- \end{itemize}
 
 %-----------RESEARCH-----------
 \section{Research}
   \resumeSubHeadingListStart
     \resumeSubheading
-      {Research Assistant, Gerych Lab}{Worcester Polytechnic Institute}
-      {Trustworthy ML (Remote); Advisor: Prof. Walter Gerych}{Apr. 2026 -- Present}
+      {Research Collaborator, Gerych Lab}{Worcester Polytechnic Institute}
+      {Representation Learning \& Multimodal ML (Remote); Advisor: Prof. Walter Gerych}{Apr. 2026 -- Present}
       \resumeItemListStart
-        \resumeItem{Contributing to research on test-time debiasing of CLIP-style vision-language models, building on the lab's BendVLM (NeurIPS 2024) and WRING work on concept-subspace bias amplification}
-        \resumeItem{Conducting evaluation and interpretability work on embedding-space debiasing methods, including projection- and rotation-based approaches to bias mitigation in VLMs}
-        \resumeItem{Expected middle-author contribution on a forthcoming paper}
+        \resumeItem{Leading implementation and experimental design for \href{https://github.com/markjouh/conceptbasis}{\underline{ConceptBasis}}, a manuscript in preparation on structured visual-attribute directions in vision-language embedding spaces}
+        \resumeItem{Built the end-to-end research stack: curated concept dictionary, VLM-assisted exhaustive labeling, class-disjoint dataset splits, adapter training, sealed evaluation protocol, reproducible experiment records, and an \href{https://markjouh.github.io/conceptbasis/}{\underline{interactive playground}}}
+        \resumeItem{Combined joint regularized concept-to-embedding regression, concept-direction orthogonality, and image-text contrastive training to separate statistical confounding from geometric interference while preserving ordinary retrieval}
+        \resumeItem{Designed evaluation across concept prediction, direction overlap, and class-disjoint compositional retrieval, including direct compositional supervision as a task-specific baseline}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
@@ -142,70 +136,39 @@
           {\textbf{RotateMate -- Image Rotation ML Model}}{\href{https://github.com/markjouh/RotateMate-model}{\underline{github.com/markjouh/RotateMate-model}}}
           \resumeSubSubheading{Personal Project}{2025 -- Present}
           \resumeItemListStart
-            \resumeItem{Built an end-to-end iOS ML system to automatically detect and correct mis-rotated images, spanning custom dataset creation, PyTorch training, and Swift/SwiftUI deployment}
-            \resumeItem{Optimized for on-device efficiency: designed 3M parameter model, implemented quantization pipeline, and engineered hardware-accelerated preprocessing to achieve $<$1ms inference latency on modern NPUs}
+            \resumeItem{Built an end-to-end iOS ML system for detecting and correcting mis-rotated images, spanning custom data, PyTorch training, quantization, hardware-accelerated preprocessing, and Swift deployment}
           \resumeItemListEnd
       \resumeProjectHeading
           {\textbf{Tiaoqi Master -- Chinese Checkers iOS App}}{\href{https://github.com/markjouh/tiaoqi-master}{\underline{github.com/markjouh/tiaoqi-master}}}
           \resumeSubSubheading{Swift Student Challenge 2026 Winner}{2025 -- 2026}
           \resumeItemListStart
-            \resumeItem{Designed and built a native iOS app in Swift 6 and SwiftUI that teaches Chinese Checkers through a play-as-you-learn tutorial and an adaptive AI opponent that scales to the player's skill level}
-            \resumeItem{Implemented an iterative-deepening minimax engine with alpha-beta pruning, heuristic move ordering, and a time-budgeted search over an axial hex-coordinate board for responsive on-device play}
-            \resumeItem{Authored a contextual commentary system that reacts to chain length, forward progress, and setup play, backed by a procedural audio-synthesis engine built on AVFoundation}
+            \resumeItem{Built a native SwiftUI learning experience with an adaptive opponent, iterative-deepening minimax engine, contextual commentary, and procedural audio; selected as a 2026 Apple Swift Student Challenge winner}
           \resumeItemListEnd
       \resumeProjectHeading
           {\textbf{Competitive Programming Library}}{\href{https://github.com/markjouh/cp-library}{\underline{github.com/markjouh/cp-library}}}
           \resumeSubSubheading{Open Source Project}{2023 -- Present}
           \resumeItemListStart
-            \resumeItem{Authored a C++ library of advanced data structure and algorithm implementations for Codeforces, ICPC, and educational reference}
+            \resumeItem{Maintained reusable C++ implementations of advanced data structures, graph algorithms, number theory, and geometry used in USACO and Codeforces competition}
           \resumeItemListEnd
     \resumeSubHeadingListEnd
 
-%-----------EXPERIENCE-----------
-\section{Experience}
-  \resumeSubHeadingListStart
-    \resumeSubheading
-      {Algorithms Club -- President \& Co-Founder}{George School}
-      {Leadership Position}{Sep. 2024 -- May 2026}
-      \resumeItemListStart
-        \resumeItem{Co-founded and lead school's Algorithms Club with 30+ active members}
-        \resumeItem{Organize weekly meetings covering competitive programming techniques, algorithm design, and problem-solving strategies}
-        \resumeItem{Helped members advance through USACO divisions, up to Platinum (the contest's highest)}
-      \resumeItemListEnd
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Python, C++, Swift/SwiftUI, C, Java, HTML/CSS/JavaScript} \\
+     \textbf{Machine Learning}{: PyTorch, NumPy, scikit-learn, vision-language encoders, adapter training, multimodal labeling and evaluation} \\
+     \textbf{Systems \& Tools}{: Linux, Git, GPU inference profiling, experiment orchestration, Xcode, iOS development}
+    }}
+ \end{itemize}
 
-    \resumeSubheading
-      {Math Tutor}{George School}
-      {Volunteer Position}{Sep. 2024 -- May 2026}
-      \resumeItemListStart
-        \resumeItem{Provide weekly peer tutoring in advanced mathematics including combinatorics and other topics}
-        \resumeItem{Help students develop problem-solving skills and mathematical intuition through one-on-one instruction}
-      \resumeItemListEnd
-  \resumeSubHeadingListEnd
-
-%-----------HONORS & AWARDS-----------
-\section{Honors \& Awards}
-  \resumeSubHeadingListStart
-    \resumeSubheading
-      {Swift Student Challenge Winner}{Apple}
-      {Selected as a 2026 Swift Student Challenge winner for Tiaoqi Master, a SwiftUI app teaching Chinese Checkers}{2026}
-    \resumeSubheading
-      {USACO Platinum}{USA Computing Olympiad}
-      {Highest division of premier US high school algorithmic competition}{Mar. 2025}
-    \resumeSubheading
-      {Codeforces Master (Rating: 2219)}{Codeforces}
-      {Top 1\% of competitors worldwide in timed algorithmic contests}{Aug. 2024}
-    \resumeSubheading
-      {First Place -- CMIMC Programming Contest}{Carnegie Mellon University}
-      {Two-time 1st overall in team-based algorithmic challenges; also 1st in Optimization round}{Apr. 2025, Apr. 2026}
-    \resumeSubheading
-      {First Place -- PClassic Programming Contest (Advanced)}{University of Pennsylvania}
-      {1st overall in Advanced Division, four-hour algorithm and data structure contest}{Apr. 2024}
-    \resumeSubheading
-      {First Place -- Massachusetts Computer Science Olympiad}{MACSO}
-      {1st overall in in-person finals at Brookline Teen Center, MA; advanced through online qualifier}{Nov. 2024}
-    \resumeSubheading
-      {First Place -- TJ Invitational Open in Informatics (TJIOI)}{Thomas Jefferson High School}
-      {1st overall in two-person team, multi-hour algorithmic coding challenges}{Apr. 2024}
-  \resumeSubHeadingListEnd
+%-----------HONORS & LEADERSHIP-----------
+\section{Honors \& Leadership}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+      \textbf{Honors}{: USACO Platinum; Codeforces Master; Apple Swift Student Challenge Winner; first-place finishes at CMIMC, PClassic Advanced, MACSO, and TJIOI} \\
+      \textbf{Leadership}{: Algorithms Club President \& Co-Founder; Mathematics Tutor, George School}
+    }}
+ \end{itemize}
 
 \end{document}
