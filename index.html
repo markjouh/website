@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mark Zhou - Computer Sciences undergraduate at UW-Madison involved in multimodal machine learning research and independent software projects.">
+    <meta name="description" content="Mark Zhou - Computer Sciences student at UW-Madison working on representation learning research: making vision-language embeddings interpretable and controllable.">
     <meta property="og:title" content="Mark Zhou">
-    <meta property="og:description" content="Computer Sciences undergraduate at UW-Madison with a background in competitive programming and multimodal machine learning research.">
+    <meta property="og:description" content="Computer Sciences student at UW-Madison working on representation learning research: making vision-language embeddings interpretable and controllable.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://markjouh.com/">
     <meta property="og:image" content="https://markjouh.com/og-image.png">
     <title>Mark Zhou</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -20,33 +20,42 @@
 <body>
     <main id="maincontent">
         <h1>Mark Zhou</h1>
+        <p class="tagline">Computer Sciences @ UW&ndash;Madison &middot; Representation Learning</p>
 
-        <p>Hi, I'm a Computer Sciences undergraduate at UW&ndash;Madison with a background in competitive programming. I'm currently involved in multimodal machine learning research and pursue a variety of independent software projects. See my <a href="resume.pdf" target="_blank" rel="noopener noreferrer">resume</a> for more.</p>
-        <p>Outside of programming, I enjoy music, photography, graphic design, cooking, and roguelike games.</p>
+        <nav class="links">
+            <a href="mailto:mark@markjouh.com"><i class="fa-solid fa-envelope"></i> Email</a>
+            <a href="resume.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-file-lines"></i> Resume</a>
+            <a href="https://github.com/markjouh"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="https://www.linkedin.com/in/xinyun-mark-zhou/"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            <a href="https://markjouh.bearblog.dev/blog/"><i class="fa-solid fa-pen-nib"></i> Blog</a>
+            <a href="https://codeforces.com/profile/mark"><i class="fa-solid fa-chart-simple"></i> Codeforces</a>
+            <a href="https://huggingface.co/markjouh"><span class="emoji-icon">&#129303;</span> Hugging&nbsp;Face</a>
+        </nav>
 
-        <h2>Find me online</h2>
-        <div class="social-links">
-            <ul class="social-col">
-                <li><a href="https://github.com/markjouh"><i class="fa-brands fa-github"></i> GitHub</a></li>
-                <li><a href="https://www.linkedin.com/in/xinyun-mark-zhou/"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
-            </ul>
-            <ul class="social-col social-col-right">
-                <li><a href="https://markjouh.bearblog.dev/blog/"><i class="fa-solid fa-pen-nib"></i> Blog</a></li>
-                <li><a href="https://codeforces.com/profile/mark"><i class="fa-solid fa-chart-simple"></i> Codeforces</a></li>
-            </ul>
-        </div>
-
-        <h2>Achievements</h2>
-        <ul>
-            <li>USA Computing Olympiad Platinum <span class="muted">(Top ~200 nationally)</span></li>
-            <li>Codeforces Master, 2219 rating <span class="muted">(Top 1% internationally)</span></li>
-            <li>Winner – Apple Swift Student Challenge 2026 <span class="muted">(Tiaoqi Master)</span></li>
-            <li>1st Place – CMIMC Programming Contest, 2025 &amp; 2026 <span class="muted">(Carnegie Mellon University)</span></li>
-            <li>1st Place – PClassic Programming Contest, Spring 2024 <span class="muted">(University of Pennsylvania)</span></li>
+        <p>Hi, I'm a Computer Sciences student at UW&ndash;Madison. I'm currently working on representation learning research with the Gerych Lab at WPI, making vision&ndash;language embeddings interpretable and controllable.</p>
+        <h2>Research</h2>
+        <ul class="item-list">
+            <li>
+                <span class="item-title"><a href="https://github.com/markjouh/conceptbasis">ConceptBasis</a></span>
+                <span class="item-note">Gerych Lab, WPI &middot; manuscript in preparation</span>
+                <span class="item-desc">Adapter training that reorganizes vision&ndash;language embeddings into separable concept directions, so visual attributes can be independently measured, edited, and composed while preserving ordinary retrieval. Try the <a href="https://markjouh.github.io/conceptbasis/">interactive playground</a>.</span>
+            </li>
         </ul>
 
-        <h2>Contact</h2>
-        <p>For inquiries, you can reach me at <a href="mailto:mark@markjouh.com">mark@markjouh.com</a>.</p>
+        <h2>Projects</h2>
+        <ul class="item-list">
+            <li>
+                <span class="item-title"><a href="https://github.com/markjouh/tiaoqi-master">Tiaoqi Master</a></span>
+                <span class="item-desc">A native SwiftUI Chinese checkers app with an adaptive minimax opponent, contextual commentary, and procedural audio.</span>
+            </li>
+        </ul>
+
+        <h2>Awards</h2>
+        <ul class="awards">
+            <li>USA Computing Olympiad Platinum <span class="muted">(Top ~200 nationally)</span></li>
+            <li>Codeforces Master, 2219 rating <span class="muted">(Top 1% internationally)</span></li>
+            <li>Winner &ndash; Apple Swift Student Challenge 2026 <span class="muted">(Tiaoqi Master)</span></li>
+        </ul>
     </main>
 </body>
 </html>
