@@ -10,9 +10,10 @@
 \usepackage{titlesec}
 \usepackage{marvosym}
 \usepackage[usenames,dvipsnames]{color}
+\definecolor{LinkNavy}{rgb}{0.122,0.306,0.475}
 \usepackage{verbatim}
 \usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks=true, urlcolor=LinkNavy, linkcolor=LinkNavy]{hyperref}
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
@@ -122,10 +123,10 @@
       {Research Collaborator, Gerych Lab}{Worcester Polytechnic Institute}
       {Representation Learning \& Multimodal ML (Remote); Advisor: Prof. Walter Gerych}{Apr. 2026 -- Present}
       \resumeItemListStart
-        \resumeItem{Leading implementation and experimental design for \href{https://github.com/markjouh/conceptbasis}{\underline{ConceptBasis}}, a manuscript in preparation on structured visual-attribute directions in vision-language embedding spaces}
-        \resumeItem{Built the end-to-end research stack: curated concept dictionary, VLM-assisted exhaustive labeling, class-disjoint dataset splits, adapter training, sealed evaluation protocol, reproducible experiment records, and an \href{https://markjouh.github.io/conceptbasis/}{\underline{interactive playground}}}
-        \resumeItem{Combined joint regularized concept-to-embedding regression, concept-direction orthogonality, and image-text contrastive training to separate statistical confounding from geometric interference while preserving ordinary retrieval}
-        \resumeItem{Designed evaluation across concept prediction, direction overlap, and class-disjoint compositional retrieval, including direct compositional supervision as a task-specific baseline}
+        \resumeItem{Leading implementation and experimental design for \href{https://github.com/markjouh/conceptbasis}{\underline{ConceptBasis}} (\href{https://markjouh.github.io/conceptbasis/playground.html}{\underline{demo}}), a paper on VLM concept directions}
+        \resumeItem{Built the end-to-end research stack: Gemma-4 labeling, SigLIP2 adapters, and sealed class-disjoint evaluation}
+        \resumeItem{Combined reverse-ridge regression with an orthogonality loss, raising compositional Recall@5 from 19.8\% to 74.5\%}
+        \resumeItem{Designed five-seed, class-disjoint evaluation across concept prediction, direction overlap, and compositional retrieval}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
@@ -133,22 +134,26 @@
 \section{Projects}
     \resumeSubHeadingListStart
       \resumeProjectHeading
-          {\textbf{RotateMate -- Image Rotation ML Model}}{\href{https://github.com/markjouh/RotateMate-model}{\underline{github.com/markjouh/RotateMate-model}}}
+          {\textbf{RotateMate -- Image Orientation Classifier}}{\href{https://github.com/markjouh/RotateMate-model}{\underline{github.com/markjouh/RotateMate-model}}}
           \resumeSubSubheading{Personal Project}{2025 -- Present}
           \resumeItemListStart
-            \resumeItem{Built an end-to-end iOS ML system for detecting and correcting mis-rotated images, spanning custom data, PyTorch training, quantization, hardware-accelerated preprocessing, and Swift deployment}
+            \resumeItem{Built an end-to-end iOS ML system with custom data, MobileNetV4 training, and SwiftUI deployment}
+            \resumeItem{Quantized a 3M-parameter classifier to 8-bit Core ML and optimized preprocessing for $<$1 ms on-device inference}
           \resumeItemListEnd
       \resumeProjectHeading
           {\textbf{Tiaoqi Master -- Chinese Checkers iOS App}}{\href{https://github.com/markjouh/tiaoqi-master}{\underline{github.com/markjouh/tiaoqi-master}}}
           \resumeSubSubheading{Swift Student Challenge 2026 Winner}{2025 -- 2026}
           \resumeItemListStart
-            \resumeItem{Built a native SwiftUI learning experience with an adaptive opponent, iterative-deepening minimax engine, contextual commentary, and procedural audio; selected as a 2026 Apple Swift Student Challenge winner}
+            \resumeItem{Built a native Swift 6/SwiftUI learning app with a play-as-you-learn tutorial and adaptive on-device AI}
+            \resumeItem{Implemented time-budgeted iterative-deepening minimax with alpha-beta pruning and heuristic move ordering}
+            \resumeItem{Engineered contextual move commentary and procedural audio synthesis with AVFoundation}
           \resumeItemListEnd
       \resumeProjectHeading
           {\textbf{Competitive Programming Library}}{\href{https://github.com/markjouh/cp-library}{\underline{github.com/markjouh/cp-library}}}
           \resumeSubSubheading{Open Source Project}{2023 -- Present}
           \resumeItemListStart
-            \resumeItem{Maintained reusable C++ implementations of advanced data structures, graph algorithms, number theory, and geometry used in USACO and Codeforces competition}
+            \resumeItem{Built a CI-verified C++ library spanning data structures, graphs/flow, strings, number theory, and heuristics}
+            \resumeItem{Automated regression tests against Library Checker and Aizu Online Judge through GitHub Actions}
           \resumeItemListEnd
     \resumeSubHeadingListEnd
 
@@ -156,9 +161,10 @@
 \section{Technical Skills}
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
-     \textbf{Languages}{: Python, C++, Swift/SwiftUI, C, Java, HTML/CSS/JavaScript} \\
-     \textbf{Machine Learning}{: PyTorch, NumPy, scikit-learn, vision-language encoders, adapter training, multimodal labeling and evaluation} \\
-     \textbf{Systems \& Tools}{: Linux, Git, GPU inference profiling, experiment orchestration, Xcode, iOS development}
+     \textbf{ML Systems}{: GPU inference profiling, CUDA, vLLM, Core ML, PyTorch, experiment orchestration} \\
+     \textbf{ML Methods}{: Vision-language models, contrastive learning, adapter training, multimodal labeling and evaluation} \\
+     \textbf{Languages}{: C++, Python, Swift, C, Java, JavaScript, HTML/CSS} \\
+     \textbf{Frameworks \& Tools}{: AVFoundation, SwiftUI, GitHub Actions, Linux, Git, Xcode}
     }}
  \end{itemize}
 
@@ -166,7 +172,9 @@
 \section{Honors \& Leadership}
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
-      \textbf{Honors}{: USACO Platinum; Codeforces Master; Apple Swift Student Challenge Winner; first-place finishes at CMIMC, PClassic Advanced, MACSO, and TJIOI} \\
+      \textbf{Competitive Programming}{: USACO Platinum; Codeforces Master (2219, top 1\%)} \\
+      \textbf{Product Awards}{: Apple Swift Student Challenge Winner (2026); c0mpiled Startup School Hackathon II (YC Startup School) -- 2nd Place \& Most Venture-Backable (\$1,500)} \\
+      \textbf{Contest Wins}{: 1st Place -- Carnegie Mellon CMIMC Programming (2x), UPenn PClassic Advanced, Massachusetts Computer Science Olympiad, and TJIOI} \\
       \textbf{Leadership}{: Algorithms Club President \& Co-Founder; Mathematics Tutor, George School}
     }}
  \end{itemize}
