@@ -10,52 +10,93 @@
     <meta property="og:url" content="https://markjouh.com/">
     <meta property="og:image" content="https://markjouh.com/og-image.png">
     <title>Mark Zhou</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260729d">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <main id="maincontent">
         <h1>Mark Zhou</h1>
-        <p class="tagline">Computer Sciences @ UW&ndash;Madison &middot; Representation Learning</p>
+        <p class="tagline">Computer Sciences @ UW&ndash;Madison</p>
+
+        <p class="bio">Hi, I'm a CS undergrad with a background in competitive programming. I'm currently involved in ML research and pursue a variety of independent projects. See my resume for more.</p>
+        <p class="bio">Outside of programming, I enjoy music, photography, graphic design, cooking, and roguelike games.</p>
+        <p class="bio">For inquiries, you can reach me at mark@markjouh.com.</p>
 
         <nav class="links">
-            <a href="mailto:mark@markjouh.com"><i class="fa-solid fa-envelope"></i> Email</a>
-            <a href="resume.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-file-lines"></i> Resume</a>
-            <a href="https://github.com/markjouh"><i class="fa-brands fa-github"></i> GitHub</a>
-            <a href="https://www.linkedin.com/in/xinyun-mark-zhou/"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-            <a href="https://markjouh.bearblog.dev/blog/"><i class="fa-solid fa-pen-nib"></i> Blog</a>
-            <a href="https://codeforces.com/profile/mark"><i class="fa-solid fa-chart-simple"></i> Codeforces</a>
-            <a href="https://huggingface.co/markjouh"><span class="emoji-icon">&#129303;</span> Hugging&nbsp;Face</a>
+            <a href="resume.pdf" target="_blank" rel="noopener noreferrer">
+                <i class="fa-regular fa-file-lines"></i>
+                <span class="link-label">Resume</span>
+                <span class="link-note">Research, projects, and awards</span>
+            </a>
+            <a href="https://www.linkedin.com/in/xinyun-mark-zhou/">
+                <i class="fa-brands fa-linkedin"></i>
+                <span class="link-label">LinkedIn</span>
+                <span class="link-note">Profile</span>
+            </a>
+            <a href="https://github.com/markjouh">
+                <i class="fa-brands fa-github"></i>
+                <span class="link-label">GitHub</span>
+                <span class="link-note">Code</span>
+            </a>
+            <a href="https://markjouh.bearblog.dev/blog/">
+                <i class="fa-solid fa-pen-nib"></i>
+                <span class="link-label">Blog</span>
+                <span class="link-note">Writing</span>
+            </a>
+            <a href="https://huggingface.co/markjouh">
+                <span class="emoji-icon">&#129303;</span>
+                <span class="link-label">Hugging&nbsp;Face</span>
+                <span class="link-note">Models and datasets</span>
+            </a>
         </nav>
 
-        <p>Hi, I'm a Computer Sciences student at UW&ndash;Madison. I'm currently working on representation learning research with the Gerych Lab at WPI, making vision&ndash;language embeddings interpretable and controllable.</p>
-        <h2>Research</h2>
-        <ul class="item-list">
-            <li>
-                <span class="item-title"><a href="https://github.com/markjouh/conceptbasis">ConceptBasis</a></span>
-                <span class="item-note">Gerych Lab, WPI &middot; manuscript in preparation</span>
-                <span class="item-desc">Adapter training that reorganizes vision&ndash;language embeddings into separable concept directions, so visual attributes can be independently measured, edited, and composed while preserving ordinary retrieval. Try the <a href="https://markjouh.github.io/conceptbasis/">interactive playground</a>.</span>
-            </li>
-        </ul>
+        <section class="work" aria-labelledby="work-heading">
+            <h2 id="work-heading">Selected Work</h2>
+            <ul class="work-list">
+                <li class="work-item">
+                    <div class="work-head">
+                        <a class="work-title" href="https://github.com/markjouh/conceptbasis">ConceptBasis</a>
+                        <span class="work-tag">Research &middot; Gerych Lab</span>
+                    </div>
+                    <p class="work-desc">Training separable, additive semantic concept directions into vision-language embedding models</p>
+                    <div class="work-links">
+                        <a href="https://markjouh.github.io/conceptbasis/playground.html"><i class="fa-solid fa-sliders"></i>Try the playground</a>
+                        <a href="https://github.com/markjouh/conceptbasis"><i class="fa-brands fa-github"></i>Code</a>
+                    </div>
+                </li>
+                <li class="work-item">
+                    <div class="work-head">
+                        <a class="work-title" href="https://github.com/markjouh/tiaoqi-master">Tiaoqi Master</a>
+                        <span class="work-tag work-tag-award">Swift Student Challenge Winner</span>
+                    </div>
+                    <p class="work-desc">A SwiftUI Chinese Checkers app that teaches as you play</p>
+                    <div class="work-links">
+                        <a href="https://github.com/markjouh/tiaoqi-master"><i class="fa-brands fa-github"></i>Code</a>
+                    </div>
+                </li>
+                <li class="work-item">
+                    <div class="work-head">
+                        <a class="work-title" href="https://github.com/markjouh/tiny-fortress">Tiny Fortress</a>
+                        <span class="work-tag">Game</span>
+                    </div>
+                    <p class="work-desc">A tower defense game for PICO-8</p>
+                    <div class="work-links">
+                        <a href="https://github.com/markjouh/tiny-fortress"><i class="fa-brands fa-github"></i>Code</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
 
-        <h2>Projects</h2>
-        <ul class="item-list">
-            <li>
-                <span class="item-title"><a href="https://github.com/markjouh/tiaoqi-master">Tiaoqi Master</a></span>
-                <span class="item-desc">A native SwiftUI Chinese checkers app with an adaptive minimax opponent, contextual commentary, and procedural audio.</span>
-            </li>
-        </ul>
-
-        <h2>Awards</h2>
-        <ul class="awards">
-            <li>USA Computing Olympiad Platinum <span class="muted">(Top ~200 nationally)</span></li>
-            <li>Codeforces Master, 2219 rating <span class="muted">(Top 1% internationally)</span></li>
-            <li>Winner &ndash; Apple Swift Student Challenge 2026 <span class="muted">(Tiaoqi Master)</span></li>
-        </ul>
+        <section class="cp" aria-labelledby="cp-heading">
+            <h2 id="cp-heading">Competitive Programming</h2>
+            <ul class="cp-list">
+                <li>USA Computing Olympiad Platinum <span class="muted">Top ~200 nationally</span></li>
+                <li><a href="https://codeforces.com/profile/mark">Codeforces Master, 2219 rating</a> <span class="muted">Top 1% internationally</span></li>
+                <li>1st Place &ndash; CMIMC Programming Contest, 2025 &amp; 2026 <span class="muted">Carnegie Mellon University</span></li>
+                <li>1st Place &ndash; PClassic Programming Contest, Spring 2024 <span class="muted">University of Pennsylvania</span></li>
+            </ul>
+        </section>
     </main>
 </body>
 </html>

@@ -1,11 +1,9 @@
 :root {
-    --bg: #0d1117;
-    --bg-raised: #161b22;
-    --border: #30363d;
-    --border-bright: #484f58;
-    --text: #e6edf3;
-    --text-dim: #8b949e;
-    --accent: #f4553a;
+    --bg: #111111;
+    --border: #262626;
+    --border-bright: #404040;
+    --text: #ededed;
+    --text-dim: #8a8a8a;
 }
 
 * {
@@ -17,27 +15,24 @@ html {
 }
 
 body {
-    font-family: "IBM Plex Sans", sans-serif;
-    line-height: 1.6;
-    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-size: 15px;
     padding: 0 20px;
     margin: 0 auto;
     max-width: 640px;
     background-color: var(--bg);
     color: var(--text);
-}
-
-::selection {
-    background: var(--accent);
-    color: var(--bg);
+    -webkit-font-smoothing: antialiased;
 }
 
 #maincontent {
-    padding: 64px 0;
+    padding: 44px 0;
 }
 
 h1 {
     font-size: 1.75em;
+    font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0 0 2px;
     color: #fff;
@@ -46,115 +41,188 @@ h1 {
 .tagline {
     font-size: 0.95em;
     color: var(--text-dim);
-    margin: 0 0 16px;
+    margin: 0 0 14px;
+}
+
+.bio {
+    margin: 0 0 10px;
+}
+
+p.bio:last-of-type {
+    margin-bottom: 28px;
 }
 
 .links {
     display: flex;
-    flex-wrap: wrap;
-    gap: 4px 20px;
-    margin: 0 0 28px;
-    font-size: 0.9em;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
 }
 
 .links a {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 6px;
-    color: var(--text-dim);
+    gap: 12px;
+    padding: 7px 2px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
     text-decoration: none;
-    transition: color 0.15s ease;
 }
 
 .links a:hover {
-    color: var(--accent);
+    border-bottom-color: var(--border-bright);
 }
 
 .links i,
 .links .emoji-icon {
     font-style: normal;
     font-size: 0.95em;
+    width: 1.25em;
+    text-align: center;
+    color: var(--text-dim);
+    transition: color 0.15s ease;
+}
+
+.links a:hover i {
+    color: #fff;
 }
 
 .links .emoji-icon {
     filter: grayscale(1) opacity(0.75);
 }
 
+.link-label {
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+.link-note {
+    margin-left: auto;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    text-align: right;
+}
+
+@media (max-width: 480px) {
+    .link-note {
+        display: none;
+    }
+}
+
 h2 {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.78em;
+    font-size: 0.8em;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
     color: var(--text-dim);
-    margin: 36px 0 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
+    margin: 32px 0 2px;
 }
 
 p {
     margin: 0 0 1em;
 }
 
-a {
-    color: var(--accent);
+.work-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--border);
+}
+
+.work-item {
+    padding: 12px 2px;
+    border-bottom: 1px solid var(--border);
+}
+
+.work-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+}
+
+.work-title {
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.work-title:hover {
+    color: #fff;
     text-decoration: underline;
-    text-decoration-color: rgba(244, 85, 58, 0.4);
+    text-underline-offset: 3px;
+}
+
+.work-tag {
+    margin-left: auto;
+    font-size: 0.8em;
+    color: var(--text-dim);
+    white-space: nowrap;
+}
+
+.work-desc {
+    margin: 0 0 5px;
+    font-size: 0.92em;
+    color: var(--text-dim);
+}
+
+.work-links {
+    display: flex;
+    gap: 18px;
+    font-size: 0.85em;
+}
+
+.work-links i {
+    font-size: 0.9em;
+    color: var(--text-dim);
+    margin-right: 6px;
+}
+
+.cp-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--border);
+}
+
+.cp-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 6px 2px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92em;
+}
+
+.muted {
+    margin-left: auto;
+    color: var(--text-dim);
+    font-size: 0.88em;
+    text-align: right;
+    white-space: nowrap;
+}
+
+a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border-bright);
     text-underline-offset: 3px;
     transition: text-decoration-color 0.15s ease;
 }
 
 a:hover {
-    text-decoration-color: var(--accent);
-}
-
-.item-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.item-list li {
-    margin-bottom: 14px;
-}
-
-.item-list .item-title {
-    font-weight: 700;
-}
-
-.item-list .item-note {
-    color: var(--text-dim);
-    font-size: 0.9em;
-}
-
-.item-list .item-desc {
-    display: block;
-    color: var(--text);
-}
-
-.awards {
-    list-style: disc;
-    padding-left: 1.2em;
-    margin: 0;
-}
-
-.awards li {
-    margin-bottom: 4px;
-}
-
-.muted {
-    color: var(--text-dim);
+    text-decoration-color: var(--text);
 }
 
 .back-button {
     display: inline-flex;
     align-items: center;
     gap: 0.5em;
-    padding: 0.6em 1.1em;
+    padding: 0.5em 1em;
     margin-top: 2em;
     border: 1px solid var(--border);
     border-radius: 6px;
-    background-color: var(--bg-raised);
     font-size: 0.9em;
     color: var(--text);
     text-decoration: none;
@@ -163,7 +231,7 @@ a:hover {
 
 .back-button::before {
     content: "\2190";
-    color: var(--accent);
+    color: var(--text-dim);
 }
 
 .back-button:hover {
